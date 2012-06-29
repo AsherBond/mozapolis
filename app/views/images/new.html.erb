@@ -1,0 +1,26 @@
+<%= provide(:title, 'New Image') %>
+<div class="row">
+  <div class="span6 offset3">
+    <ul class="breadcrumb">
+      <li>
+        <%= link_to_icon "dashboard", "Gallery Dashboard", galleries_path %>
+        <span class="divider">/</span>
+      </li>
+      <li>
+        <%= link_to_icon "camera", @gallery.title, gallery_path(@gallery) %>
+        <span class="divider">/</span>
+      </li>
+      <li>
+        <%= link_to_icon "wrench", "Image Manger", gallery_images_path(@gallery) %>
+        <span class="divider">/</span>
+      </li>
+      <li class="active"><i class="icon-plus"></i> New Image</li>
+    </ul>
+
+    <div class="well">
+
+      <%= render 'form' %>
+
+    </div>
+  </div>
+</div>

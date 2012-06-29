@@ -1,0 +1,26 @@
+<%= provide(:title, 'New Song') %>
+<div class="row">
+  <div class="span6 offset3">
+    <ul class="breadcrumb">
+      <li>
+        <%= link_to_icon "dashboard", "Album Dashboard", albums_path %>
+        <span class="divider">/</span>
+      </li>
+      <li>
+        <%= link_to_icon "music", @album.title, album_path(@album) %>
+        <span class="divider">/</span>
+      </li>
+      <li>
+        <%= link_to_icon "wrench", "Song Manger", album_songs_path(@album) %>
+        <span class="divider">/</span>
+      </li>
+      <li class="active"><i class="icon-plus"></i> New Song</li>
+    </ul>
+
+    <div class="well">
+
+      <%= render 'form' %>
+
+    </div>
+  </div>
+</div>

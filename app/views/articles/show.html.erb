@@ -1,0 +1,41 @@
+<%= provide(:title, 'Reading article..') %>
+<div class="row">
+  <div class="span12">
+    <ul class="breadcrumb">
+      <li>
+        <%= link_to_icon "user", @artist.artist_name, @artist %>
+        <span class="divider">/</span>
+      </li>
+
+      <li class="active"><i class="icon-file"></i> Reading <%= @article.title %></li>
+    </ul>
+  </div>
+</div>
+
+<div class="row">
+  <div class="span6">
+    <div class="well">
+
+      <h2><%= @article.title %></h2>
+      <p>
+        <%= image_tag @article.photo.url(:small), :class => "pull-right" if @article.photo.file? %>
+        <%= @article.content.html_safe %>
+      </p>
+      <hr>
+
+
+    </div>
+  </div>
+  <div class="span6">
+
+    <div class="well" id="comments">
+      <h6 class="hb">Comments</h6>
+      <%= render "comments/comments" %>
+      <h6 class="hb">Write your own comment</h6>
+      <%= render "comments/form" %>
+    </div>
+
+
+
+  </div>
+</div>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title><%= content_for?(:title) ? yield(:title) : "Mozapolis" %></title>
+    <%= render 'layouts/meta' %>
+    <%= render 'layouts/shim' %>
+    <%= render 'layouts/stylesheets' %>
+    <%= render 'layouts/javascripts' %>
+    <%= render 'layouts/favicons' %>
+  </head>
+  <body>
+
+    <%= render 'layouts/navbar' %>
+
+    <div class="container">
+
+      <div class="content">
+        <%= render 'shared/message' %>
+        <%= yield %>
+        
+      </div><!--/content-->
+
+      <%= render 'layouts/footer' %>
+
+    </div> <!-- /container -->
+
+    
+
+  </body>
+</html>

@@ -1,0 +1,15 @@
+<%= simple_form_for [@album,@song], :html => { :class => 'form-vertical' } do |f| %>
+  <%= f.input :title %>
+  <%= f.input :track_number, :input_html => { :class => "span1" } %>
+  <%= f.input :featured_artist %>
+  <%= f.input :lyrics, :input_html => { :class => "span5", :rows => "5" } %>
+  <hr>
+  <%= f.input :artwork %>
+  <hr>
+  <%= f.input :file %>
+  <div class="form-actions">
+    <%= f.button :submit, :class => 'btn-primary' %>
+    <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                album_songs_path, :class => 'btn' %>
+  </div>
+<% end %>

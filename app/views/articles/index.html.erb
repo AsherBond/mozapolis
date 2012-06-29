@@ -1,0 +1,48 @@
+<div class="row">
+  <div class="span12">
+    <ul class="breadcrumb">
+      <li class="active"><i class="icon-dashboard"></i> Articles Dashboard</li>
+    </ul> 
+  </div>
+</div>
+
+<div class="row">
+	<div class="span3">
+		<div class="well">
+			<h5>Easily manage and edit your articles</h5>
+			<p>To get started add a new article, and you find article settings in the edit menu!</p>
+		</div>
+	</div>
+	<div class="span9">
+		<div class="pull-right">
+			<%= link_to "<i class='icon-plus'></i> New Article".html_safe, new_article_path, :class => "btn btn-success" %>
+		</div>
+		<h2>Articles</h2>
+		<table class="table table-striped table-bordered">
+		  <thead>
+		    <tr>
+		      <th width="30%">Title</th>
+		      <th width="30%">Short</th>
+		      <th width="40%">Options</th>
+		    </tr>
+		  </thead>
+		  <tbody>
+		  	<% @articles.each do |a| %>
+		    <tr>
+		      <td><%= link_to a.title, a %></td>
+		      <td><%= truncate(strip_tags(a.content), :length => 25, :separator => ' ') %></td>
+		      <td>
+		      	<%= link_to "Edit", edit_article_path(a), :class => "btn btn-mini" %> 
+		      	<%= link_to "Delete", article_path(a), :class => "btn btn-danger btn-mini", :confirm => "Are you sure you want to delete this article?", :method => :delete %> 
+		      </td>
+		    </tr>
+		    <% end %>
+
+		  </tbody>
+		</table>
+		<% if @articles.empty? %>
+			<div class="alert alert-warning">There are no articles. <%= link_to "Click here", new_article_path %> to get started. <a class="close" data-dismiss="alert" href="#">×</a></div>
+		<% end %>
+
+	</div>
+</div>

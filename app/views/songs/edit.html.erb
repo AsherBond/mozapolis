@@ -1,0 +1,34 @@
+<%= provide(:title, 'Edit Song') %>
+<div class="row">
+	<div class="span6 offset3">
+		<ul class="breadcrumb">
+			<li>
+				<%= link_to_icon "dashboard", "Album Dashboard", albums_path %>
+				<span class="divider">/</span>
+			</li>
+			<li>
+				<%= link_to_icon "music", @album.title, album_path(@album) %>
+				<span class="divider">/</span>
+			</li>
+			<li>
+				<%= link_to_icon "wrench", "Song Manger", album_songs_path(@album) %>
+				<span class="divider">/</span>
+			</li>
+			<li class="active"><i class="icon-edit"></i> Editing Song: <%= @song.title %></li>
+		</ul>
+
+		<div class="well">
+
+			<%= render 'form' %>
+
+		</div>
+	</div>
+	<div class="span3">
+		<h6>Current Image</h6>
+		<% if @song.artwork.file? %>
+			<p><%= image_tag @song.artwork.url(:small) %></p>
+		<% else %>
+			<p>Please upload an album cover.</p>
+		<% end %>
+	</div>
+</div>

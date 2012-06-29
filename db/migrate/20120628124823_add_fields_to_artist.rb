@@ -1,0 +1,74 @@
+class AddFieldsToArtist < ActiveRecord::Migration
+  def change    
+  	add_column :artists, :first_name, :string
+    add_column :artists, :last_name, :string
+    add_column :artists, :about, :text
+    add_column :artists, :website, :string
+    add_column :artists, :paid, :boolean, :default => false
+    add_column :artists, :city, :string
+    add_column :artists, :state, :string
+    add_column :artists, :country, :string
+    add_column :artists, :zip, :string
+    add_column :artists, :artist_name, :string
+    add_column :artists, :username, :string
+    add_column :artists, :public_email, :string
+    add_column :artists, :body_background_color, :string
+    add_column :artists, :body_background_repeat, :string
+    add_column :artists, :body_background_position, :string
+    add_column :artists, :body_background_attachment, :string
+    add_column :artists, :main_artist_name_color, :string
+    add_column :artists, :main_artist_info_color, :string
+    add_column :artists, :main_artist_location_color, :string
+    add_column :artists, :main_background_color, :string
+    add_column :artists, :main_background_repeat, :string
+    add_column :artists, :main_background_position, :string
+    add_column :artists, :main_background_attachment, :string
+    add_column :artists, :news_header_color, :string
+    add_column :artists, :news_text_color, :string
+    add_column :artists, :news_link_color, :string
+    add_column :artists, :news_link_hover_color, :string
+    add_column :artists, :news_background_color, :string
+    add_column :artists, :news_background_repeat, :string
+    add_column :artists, :news_background_position, :string
+    add_column :artists, :news_background_attachment, :string
+    add_column :artists, :about_header_color, :string
+    add_column :artists, :about_text_color, :string
+    add_column :artists, :about_link_color, :string
+    add_column :artists, :about_link_hover_color, :string
+    add_column :artists, :about_background_color, :string
+    add_column :artists, :about_background_repeat, :string
+    add_column :artists, :about_background_position, :string
+    add_column :artists, :about_background_attachment, :string
+    add_column :artists, :comments_header_color, :string
+    add_column :artists, :comments_text_color, :string
+    add_column :artists, :comments_link_color, :string
+    add_column :artists, :comments_link_hover_color, :string
+    add_column :artists, :comments_background_color, :string
+    add_column :artists, :comments_background_repeat, :string
+    add_column :artists, :comments_background_position, :string
+    add_column :artists, :comments_background_attachment, :string
+    add_column :artists, :thumbnails_background_color, :string
+    add_column :artists, :thumbnails_background_hover_color, :string
+    add_column :artists, :thumbnails_border_color, :string
+    add_column :artists, :thumbnails_border_hover_color, :string
+    add_column :artists, :tables_border_color, :string
+    add_column :artists, :tables_header_color, :string
+    add_column :artists, :tables_header_background_color, :string
+    add_column :artists, :tables_row_text_color, :string
+    add_column :artists, :tables_row_background_color, :string
+    add_column :artists, :tables_row_background_hover_color, :string
+    add_column :artists, :nav_current_text_color, :string
+    add_column :artists, :nav_current_background_color, :string
+    add_column :artists, :nav_text_color, :string
+    add_column :artists, :nav_text_hover_color, :string
+    add_column :artists, :nav_background_color, :string
+    add_column :artists, :nav_background_hover_color, :string
+    add_column :artists, :tables_link_color, :string
+    add_column :artists, :tables_link_hover_color, :string
+    add_column :artists, :thumbnails_link_color, :string
+    add_column :artists, :thumbnails_link_hover_color, :string
+    add_column :artists, :slug, :string
+
+    add_index :artists, :slug, unique: true
+  end
+end

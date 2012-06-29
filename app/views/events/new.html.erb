@@ -1,0 +1,19 @@
+<div class="row">
+
+	<div class="span6 offset3">
+
+		<ul class="breadcrumb">
+		  <li>
+		    <%= link_to_icon "dashboard", "Event Dashboard", events_path %> <span class="divider">/</span>
+		  </li>
+		  <li class="active"><i class="icon-plus"></i> New Event</li>
+		</ul>	
+
+		<div class="well">
+			<%= render :partial => 'form' %>
+		</div>
+
+	</div>
+
+
+</div>

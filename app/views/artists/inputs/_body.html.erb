@@ -1,0 +1,9 @@
+<h6 class="hb">Background</h6>
+<%= f.input :body_background_color, :input_html => { :class => "color" } %>
+<%= f.input :body_background_image %>
+
+<%= render :partial => 'artists/image_props/repeat', :locals => { :prop_id => "body-br", :prop_row => "body_background_repeat" } %>
+<hr>
+<%= render :partial => 'artists/image_props/position', :locals => { :prop_id => "body-br", :prop_row => "body_background_position" } %>
+<hr>
+<%= render :partial => 'artists/image_props/attachment', :locals => { :prop_id => "body-br", :prop_row => "body_background_attachment" } %>

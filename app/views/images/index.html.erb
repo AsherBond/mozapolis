@@ -1,0 +1,58 @@
+<div class="row">
+  	<div class="span12">
+    	<ul class="breadcrumb">
+    	  <li>
+    	    <%= link_to_icon "dashboard", "Gallery Dashboard", galleries_path %>
+    	    <span class="divider">/</span>
+    	  </li>
+    	  <li>
+    	    <%= link_to_icon "camera", @gallery.title, gallery_path(@gallery) %>
+    	    <span class="divider">/</span>
+    	  </li>
+
+    	  <li class="active"><i class="icon-wrench"></i> Image Manager</li>
+    	</ul>
+	</div>
+</div>
+
+<div class="row">
+	<div class="span3">
+		<div class="well">
+			<h4>Welcome to the image manager.</h4>
+			<hr>
+			<p>Drag and drop files to arrange them.</p>
+			<p>Drag files into the drop zone to upload images.</p>
+
+		</div>
+		<div class="dropzone">
+			<i class="icon-plus"></i>
+			<p>Drop images here.</p>
+		</div>
+	</div>
+	<div class="span9">
+		<div class="pull-right">
+			<%= link_to "<i class='icon-plus'></i> New Image".html_safe, new_gallery_image_path(@gallery), :class => "btn btn-success" %>
+		</div>
+		<h2><i class="icon-camera-retro"></i> <%= @gallery.title %> Images</h2>
+		<ul class="thumbnails">
+			<% @images.each do |img| %>
+			<li class="span3">
+				<div class="thumbnail">
+					<%= image_tag img.file.url(:medium) %>
+					<div class="caption">
+						<h5><%= link_to img.title, gallery_image_path(@gallery, img) %></h5>
+						<p>
+			            	<%= link_to "<i class='icon-edit'></i>".html_safe, edit_gallery_image_path(@gallery, img), :class => 'btn btn-mini btn-info', :rel => "tooltip", :title =>  "Edit image details and the actual image."  %>
+			            	<%= link_to "<i class='icon-remove'></i>".html_safe,
+			            	            gallery_image_path(@gallery, img),
+			            	            :method => :delete,
+			            	            :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')),
+			            	            :class => 'btn btn-mini btn-danger',
+			            	            :rel => "tooltip", :title => "Delete this image forever." %>
+			            </p>					</div>
+				</div>
+			</li>
+			<% end %>
+		</ul>
+	</div>
+</div>

@@ -1,0 +1,119 @@
+<div class="row">
+	<div class="span12">
+		<h2>Top Artists</h2>
+		<ul class="thumbnails">
+			<% @new_artists.each do |artist| %>
+			<li class="span2">
+				<div class="thumbnail">
+					<%= image_tag artist.profile_image.url(:medium) %>
+					<div class="caption">
+						<h5><%= artist.artist_name %></h5>
+						<p><%= artist.username %>, <%= artist.city %></p>
+						<p>
+							<%= link_to "<i class='icon-share'></i> View Profile".html_safe, artist, :class => "btn btn-mini" %>
+						</p>
+					</div>
+				</div>
+			</li>
+			<% end %>
+
+		</ul>
+
+	</div>
+</div>
+
+<div class="row">
+
+	<div class="span6">
+		<h2>Album Chart</h2>
+		<table class="table table-bordered table-striped">
+			<thead>
+				<tr>
+					<th>Album</th>
+					<th>Artist</th>
+					<th>Views</th>
+					<th>Rating</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td><%= link_to "The Ground Folds", "#" %></td>
+					<td><%= link_to "Senses Fail", "#" %></td>
+					<td><%= link_to "<i class='icon-arrow-up'></i> 3,322".html_safe, "#", :class => "btn btn-mini" %></td>
+					<td>
+						<%= link_to "322 <i class='icon-thumbs-up'></i>".html_safe, "#", :class => "btn btn-mini btn-success" %>
+						<%= link_to "12 <i class='icon-thumbs-down'></i>".html_safe, "#", :class => "btn btn-mini btn-danger" %>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+
+	<div class="span6">
+		<h2>Song Chart</h2>
+		<table class="table table-bordered table-striped">
+			<thead>
+				<tr>
+					<th>Title</th>
+					<th>Artist</th>
+					<th>Plays</th>
+					<th>Rating</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td><%= link_to "Roam", "#" %></td>
+					<td><%= link_to "The Story So Far", "#" %></td>
+					<td><%= link_to "<i class='icon-arrow-up'></i> 3,322".html_safe, "#", :class => "btn btn-mini" %></td>
+					<td>
+						<%= link_to "322 <i class='icon-thumbs-up'></i>".html_safe, "#", :class => "btn btn-mini btn-success" %>
+						<%= link_to "12 <i class='icon-thumbs-down'></i>".html_safe, "#", :class => "btn btn-mini btn-danger" %>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</div>
+
+<div class="row">
+	<div class="span6">
+		<h2>New Albums</h2>
+		<ul class="thumbnails">
+			<% @new_albums.each do |album| %>
+			<li class="span3">
+				<div class="thumbnail">
+					<%= image_tag album.artwork.url(:medium) %>
+					<div class="caption">
+						<h5><%= album.title %></h5>
+						<p>
+							<%= link_to "<i class='icon-music'></i> Listen".html_safe, album, :class => "btn btn-mini" %>
+						</p>
+					</div>
+				</div>
+			</li>
+			<% end %>
+
+		</ul>
+	</div>
+	<div class="span6">
+		<h2>New Artists</h2>
+		<ul class="thumbnails">
+			<% @new_artists.each do |artist| %>
+			<li class="span3">
+				<div class="thumbnail">
+					<%= image_tag artist.profile_image.url(:medium) %>
+					<div class="caption">
+						<h5><%= artist.artist_name %></h5>
+						<p><%= artist.username %>, <%= artist.city %></p>
+						<p>
+							<%= link_to "<i class='icon-share'></i> View Profile".html_safe, artist, :class => "btn btn-mini" %>
+						</p>
+					</div>
+				</div>
+			</li>
+			<% end %>
+
+		</ul>
+	</div>
+</div>
+

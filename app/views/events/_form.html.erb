@@ -1,0 +1,17 @@
+
+<%= simple_form_for @event, :html => { :class => 'form-vertical' } do |f| %>
+  <%= f.input :title %>
+  <%= f.input :about, :input_html => { :class => "span4", :rows => 5 } %>
+  <hr>
+  <%= f.input :start, :input_html => { :class => "span1" } %>
+  <%= f.input :end, :input_html => { :class => "span1" } %>
+  <hr>
+  <%= f.input :photo %>
+
+  <div class="form-actions">
+    <%= f.button :submit, :class => 'btn-primary' %>
+    <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                albums_path, :class => 'btn' %>
+  </div>
+<% end %>
+

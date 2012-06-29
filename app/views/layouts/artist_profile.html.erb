@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title><%= content_for?(:title) ? yield(:title) : "Mozapolis" %></title>
+    <%= render 'layouts/meta' %>
+    <%= render 'layouts/shim' %>
+    <%= render 'layouts/stylesheets' %>
+    <%= render 'layouts/javascripts' %>
+    <%= render 'layouts/favicons' %>
+    <style type="text/css">
+      <%= make_css_for('body', 'background-image',      @artist.body_background_image) %>
+      <%= make_css_for('body', 'background-color',       @artist.body_background_color, '#') %>
+      <%= make_css_for('body', 'background-repeat',     @artist.body_background_repeat) %>
+      <%= make_css_for('body', 'background-position',   @artist.body_background_position) %>
+      <%= make_css_for('body', 'background-attachment', @artist.body_background_attachment) %>
+
+      <%= make_css_for('#main-box h1', 'color',            @artist.main_artist_name_color, '#') %>
+      <%= make_css_for('#main-box h3', 'color',            @artist.main_artist_info_color, '#') %>
+      <%= make_css_for('#main-box p', 'color',             @artist.main_artist_location_color, '#') %>
+      <%= make_css_for('#main-box', 'background-image',    @artist.main_background_image) %>
+      <%= make_css_for('#main-box', 'background-color',    @artist.main_background_color, '#') %>
+      <%= make_css_for('#main-box', 'background-repeat',   @artist.main_background_repeat) %>
+      <%= make_css_for('#main-box', 'background-position', @artist.main_background_position) %>
+
+      <%= make_css_for('#news h3', 'color',            @artist.news_header_color, '#') %>
+      <%= make_css_for('#news p', 'color',             @artist.news_text_color, '#') %>
+      <%= make_css_for('#news p a', 'color',             @artist.news_link_color, '#') %>
+      <%= make_css_for('#news p a:hover', 'color',       @artist.news_link_hover_color, '#') %>
+      <%= make_css_for('#news', 'background-image',    @artist.news_background_image) %>
+      <%= make_css_for('#news', 'background-color',    @artist.news_background_color, '#') %>
+      <%= make_css_for('#news', 'background-repeat',   @artist.news_background_repeat) %>
+      <%= make_css_for('#news', 'background-position', @artist.news_background_position) %>
+
+      <%= make_css_for('#about h3', 'color',            @artist.about_header_color, '#') %>
+      <%= make_css_for('#about p', 'color',             @artist.about_text_color, '#') %>
+      <%= make_css_for('#about p a', 'color',             @artist.about_link_color, '#') %>
+      <%= make_css_for('#about p a:hover', 'color',       @artist.about_link_hover_color, '#') %>
+      <%= make_css_for('#about', 'background-image',    @artist.about_background_image) %>
+      <%= make_css_for('#about', 'background-color',    @artist.about_background_color, '#') %>
+      <%= make_css_for('#about', 'background-repeat',   @artist.about_background_repeat) %>
+      <%= make_css_for('#about', 'background-position', @artist.about_background_position) %>
+
+      <%= make_css_for('#comments h3', 'color',            @artist.comments_header_color, '#') %>
+      <%= make_css_for('#comments blockquote p', 'color',  @artist.comments_text_color, '#') %>
+      <%= make_css_for('#comments blockquote a', 'color',             @artist.comments_link_color, '#') %>
+      <%= make_css_for('#comments blockquote a:hover', 'color',       @artist.comments_link_hover_color, '#') %>
+      <%= make_css_for('#comments', 'background-image',    @artist.comments_background_image) %>
+      <%= make_css_for('#comments', 'background-color',    @artist.comments_background_color, '#') %>
+      <%= make_css_for('#comments', 'background-repeat',   @artist.comments_background_repeat) %>
+      <%= make_css_for('#comments', 'background-position', @artist.comments_background_position) %>
+
+      <%= make_css_for('.thumbnail', 'background-color', @artist.thumbnails_background_color, '#') %>
+      <%= make_css_for('a.thumbnail', 'border', @artist.thumbnails_border_color, '1px solid #') %>
+      <%= make_css_for('.thumbnail', 'border', @artist.thumbnails_border_color, '1px solid #') %>
+      <%= make_css_for('.thumbnail p', 'color', @artist.thumbnails_text_color, '#') %>
+      <%= make_css_for('.thumbnail a', 'color', @artist.thumbnails_link_color, '#') %>
+      <%= make_css_for('.thumbnail a:hover', 'color', @artist.thumbnails_link_hover_color, '#') %>
+      <%= make_css_for('.thumbnail:hover', 'background-color', @artist.thumbnails_background_hover_color) %>
+      <%= make_css_for('.thumbnail:hover', 'border', @artist.thumbnails_border_hover_color, '1px solid #') %>
+      <%= make_css_for('a.thumbnail:hover', 'border', @artist.thumbnails_border_hover_color, '1px solid #') %>
+
+      <%= make_css_for('.table tbody tr:hover td', 'background-color', @artist.tables_row_background_hover_color, '#') %>
+      <%= make_css_for('.table thead tr', 'background-color', @artist.tables_header_background_color, '#') %>
+      <%= make_css_for('.table tbody tr', 'background-color', @artist.tables_row_background_color, '#') %>
+      <%= make_css_for('.table, .table tr, .table th, .table td', 'border-color', @artist.tables_border_color, '#') %>
+      <%= make_css_for('.table a', 'color', @artist.tables_link_color, '#') %>
+      <%= make_css_for('.table a:hover', 'color', @artist.tables_link_hover_color, '#') %>
+      <%= make_css_for('.table th', 'color', @artist.tables_header_color, '#') %>
+      <%= make_css_for('.table td', 'color', @artist.tables_row_text_color, '#') %>
+
+      <%= make_css_for('#artist-profile-tabs li.active a,#artist-profile-tabs li.active a:hover', 'color', @artist.nav_current_text_color, '#') %>
+      <%= make_css_for('#artist-profile-tabs li.active a,#artist-profile-tabs li.active a:hover', 'background-color', @artist.nav_current_background_color, '#') %>
+      <%= make_css_for('#artist-profile-tabs li a', 'color', @artist.nav_text_color, '#') %>
+      <%= make_css_for('#artist-profile-tabs li a', 'background-color', @artist.nav_background_color, '#') %>
+      <%= make_css_for('#artist-profile-tabs li a:hover', 'color', @artist.nav_text_hover_color, '#') %>
+      <%= make_css_for('#artist-profile-tabs li a:hover', 'background-color', @artist.nav_background_hover_color, '#') %>
+      body { margin-bottom:50px; }
+
+    </style>
+  </head>
+  <body>
+
+    <%= render 'layouts/navbar' %>
+
+    <div class="container">
+
+      <div class="content">
+        <%= render 'shared/message' %>
+        <%= yield %>
+        
+      </div><!--/content-->
+
+      <%= render 'layouts/footer' %>
+
+    </div> <!-- /container -->
+
+    
+
+  </body>
+</html>

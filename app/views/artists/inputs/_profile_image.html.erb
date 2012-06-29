@@ -1,0 +1,8 @@
+<% if current_artist.profile_image.file? %>
+<div class="pull-right">
+	<h6>Current Image</h6>
+	<%= image_tag current_artist.profile_image.url(:avatar) %>
+</div>
+<% end %>
+<%= f.input :profile_image %>
+

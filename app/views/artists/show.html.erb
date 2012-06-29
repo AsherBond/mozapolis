@@ -1,0 +1,234 @@
+<div class="row">
+	<div class="span8">
+		<div class="well" id="main-box">
+			<h1><%= @artist.artist_name %></h1>
+			<h3>1,000 Plays / 2,000 Views</h3>
+			<p>
+				<%= link_to "Message", root_path, :class => "btn" %>
+				<%= link_to "Follow", root_path, :class => "btn" %>
+				<%= link_to "Popup Player", root_path, :class => "btn" %>
+			</p>
+			<p>San Jose, California</p>
+		</div>
+
+		<!---->
+		<div id="moz_player"></div>
+
+		<div id="moz_player_container">
+
+		    <div id="profile-player" class="btn-group">
+		      <button class="jp-play btn btn-danger">
+		        <i class="icon-play"></i> 
+		      </button>
+		      <button class="jp-pause btn btn-danger">
+		        <i class="icon-pause"></i> 
+		      </button>
+		      <button class="jp-stop btn btn-danger">
+		        <i class="icon-stop"></i> 
+		      </button>
+		      <button class="jp-mute btn btn-inverse">
+		        <i class="icon-volume-off"></i> 
+		      </button>
+		      <button class="jp-unmute btn btn-inverse">
+		        <i class="icon-volume-down"></i> 
+		      </button>
+		      <button class="jp-volume-max btn btn-inverse">
+		        <i class="icon-volume-up"></i> 
+		      </button>
+		      <button class="play-state btn btn-info">
+		         
+		      </button>
+		      <button class="track-name btn btn-info disabled">
+		         
+		      </button>
+		      <button class="btn disabled">
+		         at <span class="extra-play-info"></span> of <span class="jp-duration"></span>, which is <span class="jp-current-time"></span>
+		      </button>
+		    </div>
+		    
+		    <table class="table table-bordered">
+		        <thead>
+		          <tr>
+		            <th width="50%">Song Title</th>
+		            <th width="20%">Vote</th>
+		            <th width="10%">Plays</th>
+		            <th width="20%">Comments</th>
+		          </tr>
+		        </thead>
+		        <tbody>
+		        	<% @songs.each do |song| %>
+		            <tr>
+		                <td><%= link_to song.title, song.file.url, :class => "track track-default" %></td>
+		                <td>
+		                    <a href="#" class="btn btn-mini btn-success"><i class="icon-circle-arrow-up"></i></a>
+		                    <a href="#" class="btn btn-mini btn-danger"><i class="icon-circle-arrow-down"></i></a>
+		                </td>
+		                <td>2,325</td>
+		                <td><%= link_to "Add Comment (34)", root_path %></td>
+		            </tr>
+		            <% end %>
+
+		        </tbody>
+		    </table>
+
+		</div>
+
+		<!---->
+
+	    <ul class="nav nav-pills" id="artist-profile-tabs">
+	      <li class="active"><a href="#news" data-toggle="tab">News</a></li>
+	      <li><a href="#gallery" data-toggle="tab">Galleries</a></li>
+	      <li><a href="#about" data-toggle="tab">About</a></li>
+	      <li><a href="#albums" data-toggle="tab">Albums</a></li>
+	      <li><a href="#videos" data-toggle="tab">Videos</a></li>
+	      <li><a href="#events" data-toggle="tab">Events</a></li>
+	      <li><a href="#comments" data-toggle="tab">Comments</a></li>
+
+	    </ul>
+
+		<!---->
+
+
+	    <div class="tab-content">
+
+	      <div class="tab-pane" id="albums">
+			<ul class="thumbnails">
+			<% @albums.each do |album| %>
+			  <li class="span2">
+			    <div class="thumbnail">
+			      <%= image_tag album.artwork.url(:medium) %>
+			      <h5><%= link_to "#{album.title}", album_path(album) %></h5>
+			      <p><%= "#{album.label}, #{album.year}" %></p>
+			    </div>
+			  </li>
+			<% end %>
+			</ul>
+	      </div>
+
+	      <div class="tab-pane" id="videos">
+			<ul class="thumbnails">
+			<% @videos.each do |video| %>
+			  <li class="span2">
+			    <div class="thumbnail">
+			      <img src="http://placehold.it/260x180" alt="">
+			      <h5><%= link_to "#{video.title}", video_path(video) %></h5>
+			    </div>
+			  </li>
+			<% end %>
+
+			</ul>
+	      </div>
+
+	      <div class="tab-pane" id="events">
+			<table class="table table-bordered tabled-striped">
+			  <thead>
+			    <tr>
+			      <th>Event</th>
+			      <th>Date</th>
+			    </tr>
+			  </thead>
+			  <tbody>
+			  	<% @events.each do |event| %>
+			    <tr>
+			      <td><%= link_to event.title, event %></td>
+			      <td><%= event.start.strftime('%b %d, %Y at %H:%M') %></td>
+			    </tr>
+			    <% end %>
+			  </tbody>
+			</table>
+	      </div>
+
+	      <div class="well tab-pane" id="about">
+	      	<h3>About</h3>
+	      	<p><%= @artist.about.html_safe %></p>
+	      </div>
+
+	      <div class="well tab-pane" id="comments">
+			<%= render "comments/comments" %>
+			<%= render "comments/form" %>
+	      </div>
+
+	      <div class="well tab-pane active" id="news">
+
+	      	<% @articles.each do |article| %>
+	      	<h3 class="hb"><%= article.title %></h3>
+	      	<p><%= article.content.html_safe %></p>
+	      	<hr>
+	      	<%= link_to "Read More", article, :class => "btn" %>
+	      	<% end %>
+
+	      </div>
+
+	      <div class="tab-pane" id="gallery">
+
+		    <ul class="thumbnails">
+		      <% @galleries.each do |gallery| %>
+		          <li class="span3">
+		            <div class="thumbnail">
+		              <img src="http://placehold.it/500x400" />
+
+		              <h5><%= link_to gallery.title, gallery %></h5>
+
+
+		            </div>
+		          </li>
+		      <% end %>
+
+		    </ul>
+
+	      </div>
+
+	 	</div>
+	</div>
+
+	<div class="span4">
+		<ul class="thumbnails">
+		  <li class="span4">
+		    <a href="#" class="thumbnail">
+		      <%= image_tag @artist.profile_image.url(:medium) if @artist.profile_image.file? %>
+		    </a>
+		  </li>
+		</ul>
+
+		<!---->
+
+		<ul class="thumbnails">
+		<% @albums.each do |album| %>
+		  <li class="span2">
+		    <div class="thumbnail">
+		      <%= image_tag album.artwork.url(:medium) %>
+		      <h5><%= link_to "#{album.title}", album_path(album) %></h5>
+		      <p><%= "#{album.label}, #{album.year}" %></p>
+		    </div>
+		  </li>
+		<% end %>
+
+		</ul>
+
+		<%= link_to "View Albums", root_path, :class => "btn" %>
+
+		<hr>
+
+		<!---->
+
+		<table class="table table-bordered tabled-striped">
+		  <thead>
+		    <tr>
+		      <th>Event</th>
+		      <th>Date</th>
+		    </tr>
+		  </thead>
+		  <tbody>
+		  	<% @events.each do |event| %>
+		    <tr>
+		      <td><%= link_to event.title, event %></td>
+		      <td><%= event.start.strftime('%b %d, %Y at %H:%M') %></td>
+		    </tr>
+		    <% end %>
+		  </tbody>
+		</table>
+
+		<%= link_to "View Events", root_path, :class => "btn" %>
+
+	</div>
+</div>

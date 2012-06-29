@@ -1,0 +1,73 @@
+<div class="row">
+  <div class="span12">
+    <ul class="breadcrumb">
+      <li class="active"><i class="icon-dashboard"></i> Album Dashboard</li>
+    </ul> 
+  </div>
+</div>
+
+<div class="row">
+  <div class="span3">
+    <div class="well">
+      <h4><i class="icon-umbrella"></i> Welcome to the album manager, we make it pretty easy and fun to manage your albums.</h4>
+      <hr>
+      <p><i class="icon-arrow-right"></i> The first album will appear as the featured playlist on your profile.</p>
+      <hr>
+      <p><i class="icon-move"></i> You can drag and drop your albums to arrage the order they appear on your profile.</p>
+      <p><i class="icon-upload-alt"></i> You can also drag and drop all your songs and upload them at the same time. You can drop them anywhere you see a drop zone.</p>
+    </div>
+  </div>
+  <script>
+  $(function() {
+    $( "#sortable" ).sortable({
+      placeholder: 'span3',
+      update: function() {
+        $.post($(this).data('update-url'), $(this).sortable('serialize'));
+      }
+    }).disableSelection();
+  });
+  </script>
+  <div class="span9">
+    <div class="pull-right">
+      <%= link_to "<i class='icon-plus'></i> New Album".html_safe, new_album_path, :class => "btn btn-success" %>
+    </div>
+    <h2>My Albums</h2>
+    <ul id="sortable" data-update-url="<%= sort_albums_url %>" class="thumbnails">
+      <% @albums.each do |album| %>
+        <%= content_tag_for :li, album, :class => "span3" do %>
+
+          <div class="thumbnail">
+            <%= image_tag album.artwork.url(:medium) if album.artwork.file? %>
+            
+            <div class="caption">
+              <h5><%= link_to album.title, album %></h5>
+              <p><%= album.label %>, <%= album.year %></p>
+              <p>
+                <%= link_to "<i class='icon-wrench'></i>".html_safe, album_songs_path(album), :class => "btn btn-mini btn-inverse", :rel => "tooltip", :title => "Album manager, you can edit and upload songs here." %>
+                <%= link_to "<i class='icon-plus'></i>".html_safe, new_album_song_path(album), :class => "btn btn-mini btn-success", :rel => "tooltip", :title => "Add a new song to the album." %>
+                <%= link_to "<i class='icon-edit'></i>".html_safe, edit_album_path(album), :class => 'btn btn-mini btn-info', :rel => "tooltip", :title =>  "Edit album details and cover image."  %>
+
+                <%= link_to "<i class='icon-remove'></i>".html_safe,
+                            album_path(album),
+                            :method => :delete,
+                            :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')),
+                            :class => 'btn btn-mini btn-danger',
+                            :rel => "tooltip",
+                            :title => "Delete this album forever." %>
+              </p>
+            </div>
+          </div>
+
+        <% end %>
+      <% end %>
+
+    </ul>
+    <% if @albums.empty? %>
+      <div class="alert alert-info">
+        <a class="close" data-dismiss="alert">×</a>
+        You have no albums. It is super easy to get started! <%= link_to "<i class='icon-plus'></i> Click here to create your first album.".html_safe, new_album_path %>
+      </div>
+    <% end %>
+  </div>
+
+</div>

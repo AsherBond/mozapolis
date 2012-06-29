@@ -1,0 +1,30 @@
+<div class="row">
+
+	<div class="span6 offset3">
+
+		<ul class="breadcrumb">
+		  <li>
+		    <%= link_to_icon "dashboard", "Album Dashboard", albums_path %> <span class="divider">/</span>
+		  </li>
+		  <li class="active"><i class="icon-edit"></i> Editing Album: <strong><%= link_to @album.title, @album %></strong></li>
+		</ul>	
+
+		<div class="well">
+			<%= render :partial => 'form' %>
+		</div>
+		<h5>I was actually trying to...</h5>
+		<hr>
+		<p>
+			<%= link_to "<i class='icon-plus'></i> Add Songs".html_safe, new_album_song_path(@album), :class => "btn btn-success" %>
+		</p>
+	</div>
+
+	<div class="span3">
+		<h6>Current Image</h6>
+		<% if @album.artwork.file? %>
+			<p><%= image_tag @album.artwork.url(:small) %></p>
+		<% else %>
+			<p>Please upload an album cover.</p>
+		<% end %>
+	</div>
+</div>

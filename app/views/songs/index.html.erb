@@ -1,0 +1,101 @@
+<div class="row">
+  <div class="span12">
+    <ul class="breadcrumb">
+      <li>
+        <%= link_to_icon "dashboard", "Album Dashboard", albums_path %> <span class="divider">/</span>
+      </li>
+      <li>
+        <%= link_to_icon "music", @album.title, album_path(@album) %> <span class="divider">/</span>
+      </li>
+      <li class="active"><i class="icon-wrench"></i> Song Manager</li>
+    </ul> 
+  </div>
+</div>
+<div class="row">
+  <div class="span3">
+    <div class="well">
+      <h2><%= @album.title %></h2>
+      <p>by <%= @album.artist.email %>
+      <hr>
+      <p><%= @album.description %></p>
+      <h6>Label / Year</h6>
+      <p><%= @album.label %>, <%= @album.year %></p> 
+      <p><%= link_to "<i class='icon-edit'></i> Edit Album Details".html_safe, edit_album_path(@album), :class => "btn btn-mini btn-danger" %></p> 
+    </div>
+    <ul class="thumbnails">
+      <li class="span3">
+        <a href="#" class="thumbnail"><img src="http://placehold.it/600x600" /></a>
+      </li>
+    </ul>
+      <p><%= link_to "<i class='icon-upload-alt'></i> Upload New Album Cover".html_safe, edit_album_path(@album), :class => "btn btn-mini btn-info" %></p> 
+  </div>
+  <div class="span9">
+
+    <h2>Songs</h2>
+    <script>
+    $(function() {
+      $( "#sortable" ).sortable({
+        helper: function(e, tr)
+        {
+          var $originals = tr.children();
+          var $helper = tr.clone();
+          $helper.children().each(function(index)
+          {
+            // Set helper cell sizes to match the original sizes
+            $(this).width($originals.eq(index).width())
+          });
+          return $helper;
+        },
+        update: function() {
+          $.post($(this).data('update-url'), $(this).sortable('serialize'));
+        }
+      }).disableSelection();
+    });
+    </script>
+    <table class="table table-bordered table-striped">
+      <thead>
+        <tr>
+
+          <th>Title</th>
+          <th>Featured Artist</th>
+          <th><%=t '.actions', :default => t("helpers.actions") %></th>
+        </tr>
+      </thead>
+      <tbody id="sortable">
+        <% @songs.each do |song| %>
+          <tr>
+
+            <td><%= song.title %></td>
+            <td><%= song.featured_artist %></td>
+            <td>
+              <%= link_to t('.edit', :default => t("helpers.links.edit")),
+                          edit_album_song_path(@album, song), :class => 'btn btn-mini' %>
+              <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+                          album_song_path(@album, song),
+                          :method => :delete,
+                          :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')),
+                          :class => 'btn btn-mini btn-danger' %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+    <% if @songs.empty? %>
+    <div class="alert alert-info">
+        <a class="close" data-dismiss="alert">×</a>
+        You have no songs. It is super easy to get started! <%= link_to "<i class='icon-plus'></i> Click here to add your first song.".html_safe, new_album_song_path %>
+    </div>
+    <% end %>
+
+    <p><strong><i class="icon-move"></i> Tip:</strong> You can drag and drop the lists to order the tracks.</p>
+
+    <%= link_to t('.new', :default => t("helpers.links.new")),
+                new_album_song_path(@album),
+                :class => 'btn btn-primary' %>
+    <hr>
+    <div class="dropzone">
+      <i class="icon-plus"></i>
+      <p>Drop songs here to upload.</p>
+    </div>
+  </div>
+</div>

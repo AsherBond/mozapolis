@@ -1,0 +1,10 @@
+<%= form_tag users_path, method: :get, :class => "form-inline", :id => "home-search" do %>
+    <div class="control-group well" style="padding:5px;">
+      <div class="input-prepend input-append">
+        <a class="btn disabled"><i class="icon-search"></i></a><%= text_field_tag :query, params[:query], :id => "typeahead", :class => "span7", :placeholder => "Enter artist name here...", :autocomplete => "off" %><%= submit_tag "Search", name: nil, :class => "btn btn-success" %>
+      </div>
+      <div class="btn-group pull-right">
+        <%= link_to "I need help!", "#", :class => "btn" %>
+      </div>
+    </div>
+<% end %>

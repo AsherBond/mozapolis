@@ -1,0 +1,17 @@
+<% @comments.each do |comment| %>
+	<blockquote>
+		<p><%= comment.content %></p>
+		<small>
+			<% if comment.poster_type == "artist" %>
+				<%= link_to comment.artist.email, "#" %> 
+			<% else %>
+				<%= link_to comment.fan.email, "#" %> 
+			<% end %>
+					
+			on <%= comment.created_at.strftime('%b %d, %Y at %H:%M') %>
+		</small>
+	</blockquote>
+<% end %>
+<% if @comments.empty? %>
+	<div class="alert alert-warning">There are no comments. Be the first! <a class="close" data-dismiss="alert" href="#">×</a></div>
+<% end %>

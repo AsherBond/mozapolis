@@ -1,0 +1,14 @@
+<h6 class="hb">Text</h6>
+<%= f.input :about_header_color, :input_html => { :class => "color" } %>
+<%= f.input :about_text_color, :input_html => { :class => "color" } %>
+<%= f.input :about_link_color, :input_html => { :class => "color" } %>
+<%= f.input :about_link_hover_color, :input_html => { :class => "color" } %>
+<h6 class="hb">Background</h6>
+<%= f.input :about_background_image %>
+<%= f.input :about_background_color, :input_html => { :class => "color" } %>
+
+<%= render :partial => 'artists/image_props/repeat', :locals => { :prop_id => "about-br", :prop_row => "about_background_repeat" } %>
+<hr>
+<%= render :partial => 'artists/image_props/position', :locals => { :prop_id => "about-br", :prop_row => "about_background_position" } %>
+<hr>
+<%= render :partial => 'artists/image_props/attachment', :locals => { :prop_id => "about-br", :prop_row => "about_background_attachment" } %>
