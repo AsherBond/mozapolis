@@ -11,7 +11,7 @@
 				<span class="label">N / A</span>
 				<% end %>
 			</p>
-			<p><%= @artist.city+',' unless @artist.city.empty? %> <%= @artist.state unless @artist.state.empty? %></p>
+			<p><%= @artist.city+',' unless @artist.city.blank? %> <%= @artist.state unless @artist.state.blank? %></p>
 		</div>
 
 		<%= render "shared/player" unless @albums.empty? %>
@@ -90,7 +90,7 @@
 
 	      <div class="well tab-pane" id="about">
 	      	<h3>About</h3>
-	      	<p><%= @artist.about.html_safe unless @artist.about.empty? %></p>
+	      	<p><%= @artist.about.html_safe unless @artist.about.blank? %></p>
 	      </div>
 
 	      <div class="well tab-pane" id="comments">
