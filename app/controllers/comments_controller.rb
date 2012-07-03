@@ -13,11 +13,22 @@ class CommentsController < ApplicationController
     @comment = @commentable.comments.build(params[:comment])
 
     if artist_signed_in?
-    	@comment.poster_type = "artist"
-    	@comment.artist_id = current_artist.id
+      notify = Notification.new
+      notify.notify_object = @commentable.id
+      notify.notify_type = @commentable.class.name
+
+      notify.user_type = "artist"
+      notify.artist_id = current_artist.id
+
+      notify.message = "You have a new comment on the #{@commentable.class.name.downcase} <strong>#{@commentable.title}</strong>."
+      notify.notify_user = @commentable.artist.id
+      notify.save
+
+      @comment.poster_type = "artist"
+      @comment.artist_id = current_artist.id
     elsif fan_signed_in?
-    	@comment.poster_type = "fan"
-    	@comment.fan_id = current_fan.id
+      @comment.poster_type = "fan"
+      @comment.fan_id = current_fan.id
     end
 
     if @comment.save

@@ -16,4 +16,7 @@ class StaticController < ApplicationController
 
   def register
   end
+  def notifications
+    @notifications = Notification.where(:notify_user => current_artist.id).order("created_at desc")
+  end
 end

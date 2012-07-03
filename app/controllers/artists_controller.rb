@@ -9,22 +9,28 @@ class ArtistsController < ApplicationController
   end
 
   def show
-
+    # Get the artists
     @artist = Artist.find(params[:id])
+    # Track views
     impressionist(@artist, :unique => [:controller_name, :action_name, :session_hash])
 
-    @albums = @artist.albums.order(:position)
-    @videos = @artist.videos.order(:position)
-    @articles = @artist.articles.order(:position)
+    # Load artist engines
+    @albums    = @artist.albums.order(:position)
+    @videos    = @artist.videos.order(:position)
+    @articles  = @artist.articles.order(:position)
     @galleries = @artist.galleries.order(:position)
-    @events = @artist.events.order(:position)
+    @events    = @artist.events.order(:position)
 
-    first_album = Album.where(:artist_id => @artist.id).order(:position).first
-    @songs = first_album.songs
+    # For the player
+    unless @albums.empty?
+      first_album = Album.where(:artist_id => @artist.id).order(:position).first
+      @songs = first_album.songs
+    end
 
+    # Comments
     @commentable = @artist
-    @comments = @commentable.comments
-    @comment = Comment.new
+    @comments    = @commentable.comments
+    @comment     = Comment.new
 
     #@photos = @artist.photos
     #@events = @artist.events

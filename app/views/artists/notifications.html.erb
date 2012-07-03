@@ -1,0 +1,12 @@
+<div class="row">
+	<div clas="span12">
+		<div class="well">
+			<h2>Notifications</h2>
+			<ul>
+				<% @notifications.each do |n| %>
+					<li><%= n.message %></li>
+				<% end %>
+			</ul>
+		</div>
+	</div>
+</div>

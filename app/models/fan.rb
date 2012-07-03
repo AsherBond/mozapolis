@@ -1,6 +1,7 @@
 class Fan < ActiveRecord::Base
 	has_many :comments, as: :commentable
 	has_many :playlists
+	has_many :notifications
 
 	# Friendly URLS
 	# -----

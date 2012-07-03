@@ -5,14 +5,16 @@
 			<h1><%= @artist.artist_name %></h1>
 			<h3>1,000 Plays / <%= @artist.impressionist_count(:filter=>:all) %> Views</h3>
 			<p>
-				<% @artist.genres.each do |genre|  %>
+				<% if @artist.genres.each do |genre|  %>
 				<%= content_tag :span, genre.name, :class => "label label-info" %>
+				<% end.empty? %>
+				<span class="label">N / A</span>
 				<% end %>
 			</p>
-			<p>San Jose, California</p>
+			<p><%= @artist.city+',' unless @artist.city.empty? %> <%= @artist.state unless @artist.state.empty? %></p>
 		</div>
 
-		<%= render "shared/player" %>
+		<%= render "shared/player" unless @albums.empty? %>
 
 	    <ul class="nav nav-pills" id="artist-profile-tabs">
 	      <li><a href="#news" data-toggle="tab">News</a></li>
@@ -32,16 +34,20 @@
 
 	      <div class="tab-pane active" id="albums">
 			<ul class="thumbnails">
-			<% @albums.each do |album| %>
-			  <li class="span2">
-			    <div class="thumbnail">
-			      <%= image_tag album.artwork.url(:medium) %>
-			      <h5><%= link_to truncate(album.title, :length => 23, :separator => ' '), album_path(album), :rel => 'tooltip', :title => album.title %></h5>
-			      <p><%= "#{album.label}, #{album.year}" %></p>
-			    </div>
-			  </li>
-			<% end %>
+				<% if @albums.each do |album| %>
+				  	<li class="span2">
+				    	<div class="thumbnail">
+				      		<%= image_tag album.artwork.url(:medium) %>
+				      		<h5><%= link_to truncate(album.title, :length => 23, :separator => ' '), album_path(album), :rel => 'tooltip', :title => album.title %></h5>
+				      		<p><%= "#{album.label}, #{album.year}" %></p>
+				    	</div>
+				  	</li>
+				<% end.empty? %>
+				<% end %>
 			</ul>
+			<% if @albums.empty? %>
+				<div class="alert alert-info">This user has no albums yet!</div>
+			<% end %>
 	      </div>
 
 	      <div class="tab-pane" id="videos">
@@ -54,8 +60,10 @@
 			    </div>
 			  </li>
 			<% end %>
-
 			</ul>
+			<% if @videos.empty? %>
+				<div class="alert alert-info">This user has no videos yet!</div>
+			<% end %>
 	      </div>
 
 	      <div class="tab-pane" id="events">
@@ -75,11 +83,14 @@
 			    <% end %>
 			  </tbody>
 			</table>
+			<% if @events.empty? %>
+				<div class="alert alert-info">This user has no events yet!</div>
+			<% end %>
 	      </div>
 
 	      <div class="well tab-pane" id="about">
 	      	<h3>About</h3>
-	      	<p><%= @artist.about.html_safe %></p>
+	      	<p><%= @artist.about.html_safe unless @artist.about.empty? %></p>
 	      </div>
 
 	      <div class="well tab-pane" id="comments">
@@ -89,13 +100,14 @@
 
 	      <div class="well tab-pane" id="news">
 
-	      	<% @articles.each do |article| %>
+	      	<% if @articles.each do |article| %>
 	      	<h2><%= article.title %></h2>
 	      	<p><%= article.content.html_safe %></p>
 	      	<hr>
 	      	<%= link_to "Read More", article, :class => "btn" %>
-	      	<% end %>
-
+	      	<% end.empty? %>
+				<div class="alert alert-info">This user has no articles yet!</div>
+			<% end %>
 	      </div>
 
 	      <div class="tab-pane" id="gallery">
@@ -114,7 +126,9 @@
 		      <% end %>
 
 		    </ul>
-
+			<% if @galleries.empty? %>
+				<div class="alert alert-info">This user has no galleries yet!</div>
+			<% end %>
 	      </div>
 
 	 	</div>
@@ -130,21 +144,21 @@
 		</ul>
 
 		<!---->
-
 		<ul class="thumbnails">
-		<% @albums.each do |album| %>
-		  <li class="span2">
-		    <div class="thumbnail">
-		      <%= image_tag album.artwork.url(:medium) %>
-		      <h5><%= link_to truncate(album.title, :length => 23, :separator => ' '), album_path(album), :rel => 'tooltip', :title => album.title %></h5>
-		      <p><%= "#{album.label}, #{album.year}" %></p>
-		    </div>
-		  </li>
+			<% @albums.each do |album| %>
+			  	<li class="span2">
+			    	<div class="thumbnail">
+			      		<%= image_tag album.artwork.url(:medium) %>
+			      		<h5><%= link_to truncate(album.title, :length => 23, :separator => ' '), album_path(album), :rel => 'tooltip', :title => album.title %></h5>
+			      		<p><%= "#{album.label}, #{album.year}" %></p>
+			    	</div>
+			  	</li>
+			<% end %>
+		</ul>
+		<% if @albums.empty? %>
+			<div class="alert alert-info">This user has no albums yet!</div>
 		<% end %>
 
-		</ul>
-
-		<%= link_to "View Albums", root_path, :class => "btn" %>
 
 		<hr>
 
@@ -166,8 +180,9 @@
 		    <% end %>
 		  </tbody>
 		</table>
-
-		<%= link_to "View Events", root_path, :class => "btn" %>
+		<% if @events.empty? %>
+			<div class="alert alert-info">This user has no events yet!</div>
+		<% end %>
 
 	</div>
 </div>

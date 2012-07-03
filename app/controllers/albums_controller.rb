@@ -7,100 +7,19 @@ class AlbumsController < ApplicationController
     render nothing: true
   end
 
-
   def upvote
     album = Album.find(params[:album_id])
-    
-    vote_up_msg   = "<i class='icon-thumbs-up'></i> <strong>#{album.artist.artist_name}</strong> thanks you for voting <strong>#{album.title}</strong> up.".html_safe
-    vote_already  = "<i class='icon-remove'></i> You have already voted for <strong>#{album.title}</strong>.".html_safe
-
-    if artist_signed_in?
-      # Check if they voted already.
-      if current_artist.voted_on?(album)
-        # Redirect back with message.
-        flash[:error] = vote_already
-        redirect_to :back
-      else
-        # Vote for the album.
-        current_artist.vote_for(album)   
-        redirect_to :back, :notice => vote_up_msg
-      end
-
-    elsif fan_signed_in? 
-
-      # Check if they voted already.
-      if current_fan.voted_on?(album)
-        # Redirect back with message.
-        flash[:error] = vote_already
-        redirect_to :back
-      else
-        # Vote for the album.
-        current_fan.vote_for(album)   
-        redirect_to :back, :notice => vote_up_msg
-      end
-    end
-
+    vote_up(album)
   end
 
   def downvote
     album = Album.find(params[:album_id])
-
-    vote_down_msg = "<i class='icon-thumbs-down'></i> <strong>#{album.artist.artist_name}</strong> does not like you for voting <strong>#{album.title}</strong> down.".html_safe
-    vote_already  = "<i class='icon-remove'></i> You have already voted for <strong>#{album.title}</strong>.".html_safe
-
-    if artist_signed_in?
-      # Check if they voted already.
-      if current_artist.voted_on?(album)
-        # Redirect back with message.
-        flash[:error] = vote_already
-        redirect_to :back
-      else
-        # Vote for the album.
-        current_artist.vote_against(album)   
-        redirect_to :back, :notice => vote_down_msg
-      end
-
-    elsif fan_signed_in? 
-      
-      # Check if they voted already.
-      if current_fan.voted_on?(album)
-        # Redirect back with message.
-        flash[:error] = vote_already
-        redirect_to :back
-      else
-        # Vote for the album.
-        current_fan.vote_against(album)   
-        redirect_to :back, :notice => vote_down_msg
-      end
-    end
-
+    vote_down(album)
   end
 
   def unvote
     album = Album.find(params[:album_id])
-
-    vote_removed = "<i class='icon-remove'></i> Vote removed!".html_safe
-    vote_never   = "<i class='icon-flag'></i> You never voted!".html_safe
-
-    if artist_signed_in?
-      if current_artist.voted_on?(album)
-        current_artist.unvote_for(album)
-        flash[:notice] = vote_removed
-        redirect_to :back
-      else
-        flash[:error] = vote_never
-        redirect_to :back
-      end
-    elsif fan_signed_in?
-      if current_fan.voted_on?(album)
-        current_fan.unvote_for(album)
-        flash[:notice] = vote_removed
-        redirect_to :back
-      else
-        flash[:error] = vote_never
-        redirect_to :back
-      end
-    end
+    remove_vote(album)
   end
 
   def index

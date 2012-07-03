@@ -47,6 +47,7 @@ Mozapolis::Application.routes.draw do
   # Engines
   #--------
   
+  resources :notifications
   resources :playlists do
     collection { post :sort }
     resources :ptracks do 

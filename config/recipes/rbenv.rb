@@ -18,7 +18,7 @@ BASHRC
     run %q{export PATH="$HOME/.rbenv/bin:$PATH"}
     run %q{eval "$(rbenv init -)"}
     run "rbenv #{rbenv_bootstrap}"
-    run "rbenv install #{ruby_version}"
+    #run "rbenv install #{ruby_version}"
     run "rbenv global #{ruby_version}"
     run "gem install bundler --no-ri --no-rdoc"
     run "rbenv rehash"

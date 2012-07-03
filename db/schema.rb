@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120702172927) do
+ActiveRecord::Schema.define(:version => 20120703212406) do
 
   create_table "albums", :force => true do |t|
     t.string   "title"
@@ -300,6 +300,18 @@ ActiveRecord::Schema.define(:version => 20120702172927) do
   add_index "impressions", ["impressionable_type", "impressionable_id", "request_hash"], :name => "poly_request_index"
   add_index "impressions", ["impressionable_type", "impressionable_id", "session_hash"], :name => "poly_session_index"
   add_index "impressions", ["user_id"], :name => "index_impressions_on_user_id"
+
+  create_table "notifications", :force => true do |t|
+    t.string   "notify_type"
+    t.string   "user_type"
+    t.integer  "notify_object"
+    t.integer  "artist_id"
+    t.integer  "fan_id"
+    t.string   "message"
+    t.integer  "notify_user"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
+  end
 
   create_table "pages", :force => true do |t|
     t.string   "title"

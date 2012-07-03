@@ -74,6 +74,7 @@ hr { border-top:1px solid rgba(0,0,0,0.1); border-bottom:1px solid rgba(255,255,
 }
 // Drop Down menu
 
+@media (min-width: 979px) { 
 ul.dropdown-menu {
 
 	#gradient > .vertical(darken(@white, 3%), darken(@white, 15%));
@@ -84,6 +85,9 @@ ul.dropdown-menu {
 	li a:hover {
 		background:rgba(0, 0, 0,.7);
 	}
+
+}
+
 
 }
 // Wells
@@ -135,6 +139,8 @@ a.thumbnail:hover, div.thumbnail:hover {
 		margin-left:0;
 		margin-right:0;
 	}
+
+
 }
 
 #sortable a.thumbnail,
@@ -145,7 +151,7 @@ a.thumbnail:hover, div.thumbnail:hover {
 	
 	#top-alert.alert {
 		padding-top:30px;
-		margin-top: -40px;
+		margin-top: -36px;
 		font-size:130%;
 		text-align:center;
 		.box-shadow(0 0 15px 10px rgba(0,0,0,.3));
@@ -315,7 +321,14 @@ footer {
 	background-image:url('/assets/grad_footer.png'); 
 	padding-top:87px;
 
+}
 
+@media (max-width: 979px) { 
+	#footer-container {
+		padding:15px;
+		.border-radius(10px 10px 0 0);
+
+	}
 }
 
 // Edit Profile

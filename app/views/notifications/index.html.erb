@@ -1,0 +1,23 @@
+<div class="row">
+	<div class="span12">
+		<div class="well">
+			<h2>Notifications</h2>
+
+				<% if @notifications.each do |n| %>
+					<% object_type = n.notify_type %>
+
+					<% object = object_type.singularize.classify.constantize.find(n.notify_object) %>
+					<h6><%= n.created_at %></h6>
+					<p><i class="icon-pushpin"></i> <%= n.message.html_safe %></p>
+					<p>
+						<%= link_to "View #{n.notify_type}", object, :class => "btn btn-mini btn-primary" %>
+						<%= link_to "Delete", notification_path(n), :class => "btn btn-danger btn-mini", :confirm => "Are you sure you want to delete this notification?", :method => :delete %> 
+					</p>
+					<hr>
+				<% end.empty? %>
+					<div class="alert alert-info"><i class="icon-bell"></i> You have no notifications :(</div>
+				<% end %>
+
+		</div>
+	</div>
+</div>

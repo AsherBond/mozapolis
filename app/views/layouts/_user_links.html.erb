@@ -1,6 +1,6 @@
 <% if artist_signed_in? %>
 
-  <li class="enlarge"><%= link_to "<i class='icon-book'></i><span class='label label-warning notification-count'>1</span>".html_safe, edit_artist_registration_path, :rel => "tooltip", :data => { :placement => "bottom" }, :title => "Notifications"  %></li>
+  <li class="enlarge"><%= link_to "<i class='icon-book'></i><span class='label label-warning notification-count'>#{current_artist.notifications.count}</span>".html_safe, notifications_path, :rel => "tooltip", :data => { :placement => "bottom" }, :title => "Notifications"  %></li>
   <li class="dropdown">
     <a href="#" class="dropdown-toggle enlarge" data-toggle="dropdown" rel="tooltip" title="Your Dashboards for managing all aspects of your account." data-placement="bottom">
       <i class="icon-dashboard"></i>
