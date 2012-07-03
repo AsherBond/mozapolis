@@ -5,7 +5,8 @@
 
 		<ul class="thumbnails">
 
-			<% @new_artists.each do |artist| %>
+
+			<% if @new_artists.each do |artist| %>
 				<li class="span2">
 					<div class="thumbnail">
 
@@ -14,15 +15,19 @@
 						<div class="caption">
 							<h5><%= link_to artist.artist_name, artist %></h5>
 							<p>
-								<% artist.genres.take(2).each do |genre|  %>
-								<%= content_tag :span, genre.name, :class => "label label-info" %>
-							<% end %>
+								<% if artist.genres.take(2).each do |genre|  %>
+									<%= content_tag :span, genre.name, :class => "label label-info" %>
+								<% end.empty? %>
+								<span class="label">N / A</span>
+								<% end %>
 							</p>
 						</div>
 
 					</div><!-- /row thumbnail -->
 				</li>
+			<% end.empty? %>
 			<% end %>
+
 
 		</ul>
 
@@ -49,7 +54,7 @@
 
 			<tbody>
 
-				<% @top_albums.each do |album|  %>
+				<% if @top_albums.each do |album|  %>
 					<tr>
 						<td><%= link_to album.title, album %></td>
 						<td><%= link_to album.artist.artist_name, album.artist %></td>
@@ -92,6 +97,7 @@
 							<% end %>
 						</td>
 					</tr>
+				<% end.empty? %>
 				<% end %>
 
 			</tbody>
@@ -117,6 +123,7 @@
 
 			<tbody>
 
+				<% if @albums %>
 				<% @top_songs.each do |song| artist = Artist.find(song.album.artist_id) %>
 					<tr>
 						<td><%= link_to song.title, song.album %></td>
@@ -148,6 +155,7 @@
 						</td>
 					</tr>
 				<% end %>
+				<% end %>
 
 			</tbody>
 
@@ -164,7 +172,7 @@
 
 		<ul class="thumbnails">
 
-			<% @new_albums.each do |album| %>
+			<% if @new_albums.each do |album| %>
 				<li class="span3">
 					<div class="thumbnail">
 
@@ -202,6 +210,7 @@
 
 					</div>
 				</li>
+			<% end.empty? %>
 			<% end %>
 
 		</ul>
@@ -213,7 +222,7 @@
 
 		<ul class="thumbnails">
 
-			<% @new_artists.each do |artist| %>
+			<% if @new_artists.each do |artist| %>
 				<li class="span3">
 					<div class="thumbnail">
 
@@ -229,6 +238,7 @@
 						</div>
 					</div>
 				</li>
+			<% end.empty? %>
 			<% end %>
 
 		</ul>
