@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title><%= content_for?(:title) ? yield(:title) : "Mozapolis" %></title>
+    <title><%= full_title(yield(:title)) %></title>
     <%= render 'layouts/meta' %>
     <%= render 'layouts/shim' %>
     <%= render 'layouts/stylesheets' %>
@@ -74,7 +74,6 @@
       <%= make_css_for('#artist-profile-tabs li a', 'background-color', @artist.nav_background_color, '#') %>
       <%= make_css_for('#artist-profile-tabs li a:hover', 'color', @artist.nav_text_hover_color, '#') %>
       <%= make_css_for('#artist-profile-tabs li a:hover', 'background-color', @artist.nav_background_hover_color, '#') %>
-      body { margin-bottom:50px; }
 
     </style>
   </head>
@@ -90,9 +89,9 @@
         
       </div><!--/content-->
 
-      <%= render 'layouts/footer' %>
 
     </div> <!-- /container -->
+    <%= render 'layouts/footer' %>
 
     
 

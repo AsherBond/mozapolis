@@ -1,8 +1,9 @@
 <% if artist_signed_in? %>
 
+  <li class="enlarge"><%= link_to "<i class='icon-book'></i><span class='label label-warning notification-count'>1</span>".html_safe, edit_artist_registration_path, :rel => "tooltip", :data => { :placement => "bottom" }, :title => "Notifications"  %></li>
   <li class="dropdown">
-    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-      <i class="icon-dashboard"></i> Dashboards
+    <a href="#" class="dropdown-toggle enlarge" data-toggle="dropdown" rel="tooltip" title="Your Dashboards for managing all aspects of your account." data-placement="bottom">
+      <i class="icon-dashboard"></i>
       <b class="caret"></b>
     </a>
     <ul class="dropdown-menu">
@@ -13,14 +14,14 @@
       <li><%= link_to '<i class="icon-bullhorn"></i> Events'.html_safe, events_path %></li>
     </ul>
   </li>
-  <li class="divider-vertical"></li>
   <li class="enlarge"><%= link_to "<i class='icon-cogs'></i>".html_safe, edit_artist_registration_path, :rel => "tooltip", :data => { :placement => "bottom" }, :title => "Edit Account"  %></li>
   <li class="enlarge"><%= link_to "<i class='icon-user'></i>".html_safe, current_artist, :rel => "tooltip", :data => { :placement => "bottom" }, :title => "Your Profile"  %></li>
 
 <% elsif fan_signed_in? %>
 
-  <li><%= link_to_icon "beaker", "My Playlists", "/path1"  %></li>
-  <li><%= link_to_icon "user", "Account", "/path1"  %></li>
+  <li class="enlarge"><%= link_to "<i class='icon-reorder'></i>".html_safe, playlists_path, :rel => "tooltip", :data => { :placement => "bottom" }, :title => "Your Playlists"  %></li>
+  <li class="enlarge"><%= link_to "<i class='icon-cogs'></i>".html_safe, edit_fan_registration_path, :rel => "tooltip", :data => { :placement => "bottom" }, :title => "Edit Account"  %></li>
+  <li class="enlarge"><%= link_to "<i class='icon-user'></i>".html_safe, current_artist, :rel => "tooltip", :data => { :placement => "bottom" }, :title => "Your Profile"  %></li>
 
 <% elsif user_signed_in? %>
 
@@ -38,5 +39,5 @@
 
 <% if user_signed_in? || fan_signed_in? || artist_signed_in? %>
   <li class="divider-vertical"></li>
-  <li class="enlarge"><%= link_to'<i class="icon-signout"></i>'.html_safe, destroy_artist_session_path, :method => :delete, :rel => "tooltip", :title => "Signout", :data => { :placement => "bottom" } %></li>
+  <li><%= link_to'<i class="icon-signout"></i> Signout'.html_safe, destroy_artist_session_path, :method => :delete %></li>
 <% end %>

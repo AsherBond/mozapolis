@@ -1,10 +1,11 @@
+<%= provide(:title, @album.title) %>
 <div class="row">
   <div class="span12">
     <ul class="breadcrumb">
       <li>
-        <%= link_to_icon "user", @album.artist.artist_name, root_path %> <span class="divider">/</span>
+        <%= link_to_icon "user", @album.artist.artist_name, @album.artist %> <span class="divider">/</span>
       </li>
-      <li class="active"><i class="icon-music"></i> Listing to album: <strong><%= @album.title %></strong></li>
+      <li class="active"><i class="icon-music"></i> Listening to album: <strong><%= @album.title %></strong></li>
     </ul> 
   </div>
 </div>
@@ -26,70 +27,9 @@
     </ul>
 
   </div>
+
   <div class="span8">
-    <!---->
-    <div id="moz_player"></div>
-
-    <div id="moz_player_container">
-
-        <div id="profile-player" class="btn-group">
-          <button class="jp-play btn btn-danger">
-            <i class="icon-play"></i> 
-          </button>
-          <button class="jp-pause btn btn-danger">
-            <i class="icon-pause"></i> 
-          </button>
-          <button class="jp-stop btn btn-danger">
-            <i class="icon-stop"></i> 
-          </button>
-          <button class="jp-mute btn btn-inverse">
-            <i class="icon-volume-off"></i> 
-          </button>
-          <button class="jp-unmute btn btn-inverse">
-            <i class="icon-volume-down"></i> 
-          </button>
-          <button class="jp-volume-max btn btn-inverse">
-            <i class="icon-volume-up"></i> 
-          </button>
-          <button class="play-state btn btn-info">
-             
-          </button>
-          <button class="track-name btn btn-info disabled">
-             
-          </button>
-          <button class="btn disabled">
-             at <span class="extra-play-info"></span> of <span class="jp-duration"></span>, which is <span class="jp-current-time"></span>
-          </button>
-        </div>
-        
-        <table class="table table-bordered">
-            <thead>
-              <tr>
-                <th width="50%">Song Title</th>
-                <th width="20%">Vote</th>
-                <th width="10%">Plays</th>
-                <th width="20%">Comments</th>
-              </tr>
-            </thead>
-            <tbody>
-              <% @songs.each do |song| %>
-                <tr>
-                    <td><%= link_to song.title, song.file.url, :class => "track track-default" %></td>
-                    <td>
-                        <a href="#" class="btn btn-mini btn-success"><i class="icon-circle-arrow-up"></i></a>
-                        <a href="#" class="btn btn-mini btn-danger"><i class="icon-circle-arrow-down"></i></a>
-                    </td>
-                    <td>2,325</td>
-                    <td><%= link_to "Add Comment (34)", root_path %></td>
-                </tr>
-                <% end %>
-
-            </tbody>
-        </table>
-
-    </div>
-
-    <!---->
+    <%= render "shared/player" %>
 
     <div class="well" id="comments">
       <h6 class="hb">Comments</h6>

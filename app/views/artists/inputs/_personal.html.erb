@@ -1,3 +1,9 @@
+<%= f.input :username %>
 <%= f.input :first_name %>
 <%= f.input :last_name %>
 <%= f.input :about, :input_html => {:class => "span5", :rows => 8 } %>
+<%= f.input :interests, :input_html => {:class => "span5", :rows => 8 } %>
+<hr>
+<div class="form-actions">
+	<%= f.button :submit, "Save Changes", :class => "btn btn-success" %>
+</div>

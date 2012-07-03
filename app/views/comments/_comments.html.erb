@@ -3,7 +3,7 @@
 		<p><%= comment.content %></p>
 		<small>
 			<% if comment.poster_type == "artist" %>
-				<%= link_to comment.artist.email, "#" %> 
+				<%= link_to comment.artist.artist_name, "#" %> 
 			<% else %>
 				<%= link_to comment.fan.email, "#" %> 
 			<% end %>

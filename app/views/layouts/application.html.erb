@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title><%= content_for?(:title) ? yield(:title) : "Mozapolis" %></title>
+    <title><%= full_title(yield(:title)) %></title>
     <%= render 'layouts/meta' %>
     <%= render 'layouts/shim' %>
     <%= render 'layouts/stylesheets' %>
@@ -20,11 +20,9 @@
         
       </div><!--/content-->
 
-      <%= render 'layouts/footer' %>
 
     </div> <!-- /container -->
-
-    
+    <%= render 'layouts/footer' %>
 
   </body>
 </html>

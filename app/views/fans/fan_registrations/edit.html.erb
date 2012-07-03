@@ -1,0 +1,60 @@
+<div class="row">
+  <div class="span3 offset1">
+    <ul id="edit-profile-links" class="nav nav-pills nav-stacked" id="edit-profile-tabs">
+      <li class="active"><a href="#personal" data-toggle="tab"><i class="icon-user"></i> Personal</a></li>
+      <li><a href="#profile-image" data-toggle="tab"><i class="icon-picture"></i> Profile Image</a></li>
+      <li><a href="#email" data-toggle="tab"><i class="icon-envelope-alt"></i> Email</a></li>
+      <li><a href="#location" data-toggle="tab"><i class="icon-map-marker"></i> Location</a></li>
+      <li><a href="#password" data-toggle="tab"><i class="icon-key"></i> Password</a></li>
+      <li><a href="#cancel" data-toggle="tab"><i class="icon-remove"></i> Cancel</a></li>
+    </ul>
+  </div>
+  <div class="span7">
+    <%= simple_form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put, :class => "form-vertical" }) do |f| %>
+
+    <p style="margin:00;padding:00;">
+      <h6 style="margin:00;padding:00;">
+        Click to save changes <i class="icon-arrow-right"></i>
+        <%= f.button :submit, "Save Changes", :class => "btn btn-success btn-mini pull-right" %>
+      </h6>
+    </p>
+
+    <%= f.error_notification %>
+    <div class="tab-content">
+
+      <div class="well tab-pane active" id="personal">
+        <h2>Edit Personal Information</h2>
+        <%= render :partial => 'artists/inputs/personal', :locals => { :f => f } %>
+      </div>
+
+      <div class="well tab-pane" id="profile-image">
+        <h2>Profile Image</h2>
+        <%= render :partial => 'fans/inputs/profile_image', :locals => { :f => f } %>
+      </div>
+
+      <div class="well tab-pane" id="email">
+        <h2>Edit Email Information</h2>
+        <%= render :partial => 'artists/inputs/email', :locals => { :f => f } %>
+      </div>
+
+      <div class="well tab-pane" id="location">
+        <h2>Edit Location Information</h2>
+        <%= render :partial => 'artists/inputs/location', :locals => { :f => f } %>
+      </div>
+
+      <div class="well tab-pane" id="password">
+        <h2>Update Password</h2>
+        <%= render :partial => 'artists/inputs/passwords', :locals => { :f => f } %>
+      </div>
+
+      <div class="well tab-pane" id="cancel">
+        <h2>Cancel my account</h2>
+        <p>Unhappy? <%= link_to "Cancel my account", registration_path(resource_name), :confirm => "Are you sure?", :method => :delete, :class => "btn btn-danger" %>.</p>
+      </div>
+
+    </div>
+
+    <% end %>
+  </div>
+</div>
+ 

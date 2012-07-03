@@ -1,0 +1,10 @@
+
+<%= simple_form_for @playlist, :html => { :class => 'form-vertical' } do |f| %>
+  <%= f.input :name %>
+
+  <div class="form-actions">
+    <%= f.button :submit, :class => 'btn-primary' %>
+    <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                albums_path, :class => 'btn' %>
+  </div>
+<% end %>

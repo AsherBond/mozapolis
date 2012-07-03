@@ -3,8 +3,12 @@
 		<div class="well">
 			<h2><i class="icon-headphones"></i> Artist Sign up</h2>
 			<p>All we need is your email, and a few other details to get started! </p>
+			<h6>Or sign up with....</h6>
+			<p style="text-align:center;">
+				<%= link_to "<i class='icon-twitter'></i> Twitter".html_safe, nil, :class => "btn btn-large btn-info" %>
+				<%= link_to "<i class='icon-facebook'></i> Facebook".html_safe, nil, :class => "btn btn-large" %>
+			</p>
 			<hr>
-
 			<%= simple_form_for(resource, :as => resource_name, :url => registration_path(resource_name), :defaults => { :input_html => { :class => 'span5' } }) do |f| %>
 			  <%= f.error_notification %>
 

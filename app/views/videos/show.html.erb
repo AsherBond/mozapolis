@@ -1,6 +1,7 @@
+<%= provide(:title, @video.title) %>
 <div class="row">
   <div class="span6">
-    <video id="my_video_1" class="video-js vjs-default-skin" controls
+    <video class="video-js vjs-default-skin" controls
       preload="auto" width="100%" height="300" poster="my_video_poster.png"
       data-setup="{}">
       <source src="<%= @video.file.url %>" type='video/mp4'>

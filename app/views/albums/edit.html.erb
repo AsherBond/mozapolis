@@ -1,3 +1,4 @@
+<%= provide(:title, 'Editing Album: '+ @album.title) %>
 <div class="row">
 
 	<div class="span6 offset3">
@@ -12,11 +13,7 @@
 		<div class="well">
 			<%= render :partial => 'form' %>
 		</div>
-		<h5>I was actually trying to...</h5>
-		<hr>
-		<p>
-			<%= link_to "<i class='icon-plus'></i> Add Songs".html_safe, new_album_song_path(@album), :class => "btn btn-success" %>
-		</p>
+
 	</div>
 
 	<div class="span3">

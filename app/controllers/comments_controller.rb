@@ -21,7 +21,7 @@ class CommentsController < ApplicationController
     end
 
     if @comment.save
-      redirect_to @commentable, notice: "<i class='icon-comments'></i> Your comment has been posted!".html_safe
+      redirect_to :back, notice: "<i class='icon-comments'></i> Your comment has been posted!".html_safe
     else
       render :new
     end

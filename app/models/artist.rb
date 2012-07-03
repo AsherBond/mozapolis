@@ -1,11 +1,20 @@
 class Artist < ActiveRecord::Base
 
 	has_many :albums
+  has_many :genres
   has_many :galleries
   has_many :articles
   has_many :events
 	has_many :videos
 	has_many :comments, as: :commentable
+
+  # Friendly URLS
+  # -----
+  extend FriendlyId
+  friendly_id :username, use: :slugged
+
+  acts_as_voter
+  is_impressionable
 
 	# Include default devise modules. Others available are:
 	# :token_authenticatable, :confirmable,
@@ -16,8 +25,8 @@ class Artist < ActiveRecord::Base
   # MASS ASSIGNMENT
   # ---------------
   attr_accessible :email, :password, :password_confirmation, :remember_me, 
-  				  :first_name, :last_name, :username, :about, :website, :paid, 
-            :city, :state, :country, :zip, :artist_name, :public_email, :profile_image,
+  				  :first_name, :last_name, :username, :about, :website, :paid, :genre_tokens,
+            :city, :state, :country, :zip, :artist_name, :public_email, :profile_image, :interests,
             :body_background_image, 
             :body_background_color, 
             :body_background_repeat, 
@@ -80,6 +89,11 @@ class Artist < ActiveRecord::Base
             :nav_background_color,
             :nav_background_hover_color
 
+  attr_reader :genre_tokens
+
+  def genre_tokens=(tokens)
+    self.genre_ids = Genre.ids_from_tokens(tokens)
+  end
   # Valid email regex.
   # -----
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
@@ -129,7 +143,16 @@ class Artist < ActiveRecord::Base
 
   # Validate images.
   # -----
-  has_attached_file :profile_image, :styles => {:small => "150x150#", :medium => "400x400#", :large => "900x900>", :avatar => "60x60#"},
+  has_attached_file :profile_image, 
+                    :styles => {
+                      :small => "150x150#", 
+                      :full_small => "150x150>", 
+                      :medium => "400x400#", 
+                      :full_medium => "400x400>", 
+                      :large => "900x900#", 
+                      :full_large => "900x900>",
+                      :avatar => "60x60#"
+                    },
                     :url => "/system/users/profile_image/:id/:style/:basename.:extension",
                     :path => ":rails_root/public/system/users/profile_image/:id/:style/:basename.:extension"
 

@@ -1,32 +1,43 @@
 <div class="row">
 	<div class="span12">
+
 		<h2>Top Artists</h2>
+
 		<ul class="thumbnails">
+
 			<% @new_artists.each do |artist| %>
-			<li class="span2">
-				<div class="thumbnail">
-					<%= image_tag artist.profile_image.url(:medium) %>
-					<div class="caption">
-						<h5><%= artist.artist_name %></h5>
-						<p><%= artist.username %>, <%= artist.city %></p>
-						<p>
-							<%= link_to "<i class='icon-share'></i> View Profile".html_safe, artist, :class => "btn btn-mini" %>
-						</p>
-					</div>
-				</div>
-			</li>
+				<li class="span2">
+					<div class="thumbnail">
+
+						<%= image_tag artist.profile_image.url(:medium) %>
+
+						<div class="caption">
+							<h5><%= link_to artist.artist_name, artist %></h5>
+							<p>
+								<% artist.genres.take(2).each do |genre|  %>
+								<%= content_tag :span, genre.name, :class => "label label-info" %>
+							<% end %>
+							</p>
+						</div>
+
+					</div><!-- /row thumbnail -->
+				</li>
 			<% end %>
 
 		</ul>
 
-	</div>
-</div>
+	</div><!-- /span12 end -->
+
+</div><!-- /row end -->
 
 <div class="row">
 
 	<div class="span6">
+
 		<h2>Album Chart</h2>
+
 		<table class="table table-bordered table-striped">
+
 			<thead>
 				<tr>
 					<th>Album</th>
@@ -35,23 +46,66 @@
 					<th>Rating</th>
 				</tr>
 			</thead>
+
 			<tbody>
-				<tr>
-					<td><%= link_to "The Ground Folds", "#" %></td>
-					<td><%= link_to "Senses Fail", "#" %></td>
-					<td><%= link_to "<i class='icon-arrow-up'></i> 3,322".html_safe, "#", :class => "btn btn-mini" %></td>
-					<td>
-						<%= link_to "322 <i class='icon-thumbs-up'></i>".html_safe, "#", :class => "btn btn-mini btn-success" %>
-						<%= link_to "12 <i class='icon-thumbs-down'></i>".html_safe, "#", :class => "btn btn-mini btn-danger" %>
-					</td>
-				</tr>
+
+				<% @top_albums.each do |album|  %>
+					<tr>
+						<td><%= link_to album.title, album %></td>
+						<td><%= link_to album.artist.artist_name, album.artist %></td>
+						<td><%= link_to album.impressionist_count(:filter=>:all), "#", :class => "disabled btn btn-mini" %></td>
+						<td>
+							<% if artist_signed_in? %>
+								<% if current_artist.voted_on?(album) %>
+									<%= link_to "#{album.votes_for} <i class='icon-thumbs-up'></i>".html_safe, upvote_albums_url("album_id" => album.id), 
+												:method => :post, :class => " vote btn disabled btn-mini btn-success" %>
+
+									<%= link_to "#{album.votes_against} <i class='icon-thumbs-down'></i>".html_safe, downvote_albums_url("album_id" => album.id), 
+												:method => :post, :class => " vote disabled btn btn-mini btn-danger" %>
+
+									<%= link_to "<i class='icon-remove'></i>".html_safe, unvote_albums_url("album_id" => album.id), 
+												:method => :post, :class => "btn btn-mini btn-inverse" %>
+								<% else %>
+									<%= link_to "#{album.votes_for} <i class='icon-thumbs-up'></i>".html_safe, upvote_albums_url("album_id" => album.id), 
+												:method => :post, :class => " vote btn btn-mini btn-success" %>
+
+									<%= link_to "#{album.votes_against} <i class='icon-thumbs-down'></i>".html_safe, downvote_albums_url("album_id" => album.id), 
+												:method => :post, :class => " vote btn btn-mini btn-danger" %>
+								<% end %>
+							<% elsif fan_signed_in? %>
+								<% if current_fan.voted_on?(album) %>
+									<%= link_to "#{album.votes_for} <i class='icon-thumbs-up'></i>".html_safe, upvote_albums_url("album_id" => album.id), 
+												:method => :post, :class => " vote btn disabled btn-mini btn-success" %>
+
+									<%= link_to "#{album.votes_against} <i class='icon-thumbs-down'></i>".html_safe, downvote_albums_url("album_id" => album.id), 
+												:method => :post, :class => " vote disabled btn btn-mini btn-danger" %>
+
+									<%= link_to "<i class='icon-remove'></i>".html_safe, unvote_albums_url("album_id" => album.id), 
+												:method => :post, :class => "btn btn-mini btn-inverse" %>
+								<% else %>
+									<%= link_to "#{album.votes_for} <i class='icon-thumbs-up'></i>".html_safe, upvote_albums_url("album_id" => album.id), 
+												:method => :post, :class => " vote btn btn-mini btn-success" %>
+
+									<%= link_to "#{album.votes_against} <i class='icon-thumbs-down'></i>".html_safe, downvote_albums_url("album_id" => album.id), 
+												:method => :post, :class => " vote btn btn-mini btn-danger" %>
+								<% end %>
+							<% end %>
+						</td>
+					</tr>
+				<% end %>
+
 			</tbody>
+
 		</table>
-	</div>
+
+	</div><!-- /span6 end -->
 
 	<div class="span6">
+
 		<h2>Song Chart</h2>
+
 		<table class="table table-bordered table-striped">
+
 			<thead>
 				<tr>
 					<th>Title</th>
@@ -60,60 +114,124 @@
 					<th>Rating</th>
 				</tr>
 			</thead>
+
 			<tbody>
-				<tr>
-					<td><%= link_to "Roam", "#" %></td>
-					<td><%= link_to "The Story So Far", "#" %></td>
-					<td><%= link_to "<i class='icon-arrow-up'></i> 3,322".html_safe, "#", :class => "btn btn-mini" %></td>
-					<td>
-						<%= link_to "322 <i class='icon-thumbs-up'></i>".html_safe, "#", :class => "btn btn-mini btn-success" %>
-						<%= link_to "12 <i class='icon-thumbs-down'></i>".html_safe, "#", :class => "btn btn-mini btn-danger" %>
-					</td>
-				</tr>
+
+				<% @top_songs.each do |song| artist = Artist.find(song.album.artist_id) %>
+					<tr>
+						<td><%= link_to song.title, song.album %></td>
+						<td><%= link_to artist.artist_name, artist %></td>
+						<td><%= link_to "<i class='icon-arrow-up'></i> 3,322".html_safe, "#", :class => "btn btn-mini" %></td>
+						<td>
+	                      <% if artist_signed_in? %>
+	                        <% if current_artist.voted_on?(song) %>
+	                          <%= link_to "#{song.votes_for} <i class='icon-thumbs-up'></i>".html_safe, upvote_songs_url("song_id" => song.id), :method => :post, :class => " vote btn disabled btn-mini btn-success" %>
+	                          <%= link_to "#{song.votes_against} <i class='icon-thumbs-down'></i>".html_safe, downvote_songs_url("song_id" => song.id), :method => :post, :class => " vote disabled btn btn-mini btn-danger" %>
+	                          <%= link_to "<i class='icon-remove'></i>".html_safe, unvote_songs_url("song_id" => song.id), :method => :post, :class => "btn btn-mini btn-inverse" %>
+	                        <% else %>
+	                          <%= link_to "#{song.votes_for} <i class='icon-thumbs-up'></i>".html_safe, upvote_songs_url("song_id" => song.id), :method => :post, :class => " vote btn btn-mini btn-success" %>
+	                          <%= link_to "#{song.votes_against} <i class='icon-thumbs-down'></i>".html_safe, downvote_songs_url("song_id" => song.id), :method => :post, :class => " vote btn btn-mini btn-danger" %>
+	                        <% end %>
+	                      <% elsif fan_signed_in? %>
+	                        <% if current_fan.voted_on?(song) %>
+	                          <%= link_to "#{song.votes_for} <i class='icon-thumbs-up'></i>".html_safe, upvote_songs_url("song_id" => song.id), :method => :post, :class => " vote btn disabled btn-mini btn-success" %>
+	                          <%= link_to "#{song.votes_against} <i class='icon-thumbs-down'></i>".html_safe, downvote_songs_url("song_id" => song.id), :method => :post, :class => " vote disabled btn btn-mini btn-danger" %>
+	                          <%= link_to "<i class='icon-remove'></i>".html_safe, unvote_songs_url("song_id" => song.id), :method => :post, :class => "btn btn-mini btn-inverse" %>
+	                        <% else %>
+	                          <%= link_to "#{song.votes_for} <i class='icon-thumbs-up'></i>".html_safe, upvote_songs_url("song_id" => song.id), :method => :post, :class => " vote btn btn-mini btn-success" %>
+	                          <%= link_to "#{song.votes_against} <i class='icon-thumbs-down'></i>".html_safe, downvote_songs_url("song_id" => song.id), :method => :post, :class => " vote btn btn-mini btn-danger" %>
+	                        <% end %>
+	                      <% else %>
+	                          <%= link_to "#{song.votes_for} <i class='icon-thumbs-up'></i>".html_safe, nil, :class => "vote btn disabled btn-mini btn-success", :rel => "tooltip", :title => "Sign in to vote." %>
+	                          <%= link_to "#{song.votes_against} <i class='icon-thumbs-down'></i>".html_safe, nil, :class => " vote disabled btn btn-mini btn-danger", :rel => "tooltip", :title => "Sign in to vote." %>	                      
+	                      <% end %>
+						</td>
+					</tr>
+				<% end %>
+
 			</tbody>
+
 		</table>
-	</div>
-</div>
+
+	</div><!-- /span6 end -->
+
+</div><!-- /row end -->
 
 <div class="row">
 	<div class="span6">
+
 		<h2>New Albums</h2>
+
 		<ul class="thumbnails">
+
 			<% @new_albums.each do |album| %>
-			<li class="span3">
-				<div class="thumbnail">
-					<%= image_tag album.artwork.url(:medium) %>
-					<div class="caption">
-						<h5><%= album.title %></h5>
-						<p>
-							<%= link_to "<i class='icon-music'></i> Listen".html_safe, album, :class => "btn btn-mini" %>
-						</p>
+				<li class="span3">
+					<div class="thumbnail">
+
+						<%= image_tag album.artwork.url(:medium) %>
+
+						<div class="caption">
+
+							<h5><%= link_to album.title, album %></h5>
+							<%= content_tag :p, album.artist.artist_name %>
+
+							<p>
+								<div class="btn-group">
+									<%= link_to "<i class='icon-user'></i> Profile".html_safe, album.artist, :class => "btn btn-mini" %>
+
+									<% if artist_signed_in? %>
+										<% if current_artist.voted_on?(album) %>
+											<%= link_to "#{album.votes_for} <i class='icon-thumbs-up'></i>".html_safe, upvote_albums_url("album_id" => album.id), 
+				                    	  				:method => :post, :class => " vote btn disabled btn-mini btn-success" %>
+
+											<%= link_to "#{album.votes_against} <i class='icon-thumbs-down'></i>".html_safe, downvote_albums_url("album_id" => album.id), 
+				                    	  				:method => :post, :class => " vote disabled btn btn-mini btn-danger" %>
+
+											<%= link_to "<i class='icon-remove'></i>".html_safe, unvote_albums_url("album_id" => album.id), 
+														:method => :post, :class => "btn btn-mini btn-inverse" %>
+										<% else %>
+											<%= link_to "#{album.votes_for} <i class='icon-thumbs-up'></i>".html_safe, upvote_albums_url("album_id" => album.id), 
+				                    	  				:method => :post, :class => " vote btn btn-mini btn-success" %>
+											<%= link_to "#{album.votes_against} <i class='icon-thumbs-down'></i>".html_safe, downvote_albums_url("album_id" => album.id), 
+				                    	  				:method => :post, :class => " vote btn btn-mini btn-danger" %>
+										<% end %>
+									<% end %>
+								</div>
+							</p>
+						</div>
+
 					</div>
-				</div>
-			</li>
+				</li>
 			<% end %>
 
 		</ul>
-	</div>
+	</div><!-- /span6 end -->
+
 	<div class="span6">
+
 		<h2>New Artists</h2>
+
 		<ul class="thumbnails">
+
 			<% @new_artists.each do |artist| %>
-			<li class="span3">
-				<div class="thumbnail">
-					<%= image_tag artist.profile_image.url(:medium) %>
-					<div class="caption">
-						<h5><%= artist.artist_name %></h5>
-						<p><%= artist.username %>, <%= artist.city %></p>
-						<p>
-							<%= link_to "<i class='icon-share'></i> View Profile".html_safe, artist, :class => "btn btn-mini" %>
-						</p>
+				<li class="span3">
+					<div class="thumbnail">
+
+						<%= image_tag artist.profile_image.url(:medium) %>
+
+						<div class="caption">
+							<h5><%= link_to artist.artist_name, artist %></h5>
+							<p>
+								<% artist.genres.take(2).each do |genre|  %>
+									<%= content_tag :span, genre.name, :class => "label label-info" %>
+								<% end %>
+							</p>
+						</div>
 					</div>
-				</div>
-			</li>
+				</li>
 			<% end %>
 
 		</ul>
-	</div>
-</div>
 
+	</div><!-- /span6 end -->
+</div><!-- /row end -->

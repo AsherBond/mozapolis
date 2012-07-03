@@ -1,9 +1,13 @@
 class ImagesController < ApplicationController
-  # GET /images
-  # GET /images.json
+  def sort
+    params[:image].each_with_index do |id, index|
+      Image.update_all({position: index+1}, {id: id})
+    end
+    render nothing: true
+  end
   def index
     @gallery = Gallery.find(params[:gallery_id])
-    @images = @gallery.images
+    @images = @gallery.images.order(:position)
 
     respond_to do |format|
       format.html # index.html.erb
@@ -54,7 +58,7 @@ class ImagesController < ApplicationController
       flash[:notice] = "Successfully created image."
       redirect_to gallery_images_path(@gallery)
     else
-      render :action => 'index'
+      render :action => 'new'
     end
   end
 

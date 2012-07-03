@@ -1,3 +1,4 @@
+<%= provide(:title, 'Articles Dashboard') %>
 <div class="row">
   <div class="span12">
     <ul class="breadcrumb">
@@ -8,10 +9,11 @@
 
 <div class="row">
 	<div class="span3">
-		<div class="well">
-			<h5>Easily manage and edit your articles</h5>
-			<p>To get started add a new article, and you find article settings in the edit menu!</p>
-		</div>
+	  <div class="well">
+	    <h4><i class="icon-umbrella"></i> Welcome to the articles manager, we make it pretty easy and fun to manage your articles.</h4>
+	    <hr>
+	    <p><i class="icon-move"></i> You can drag and drop your articles to arrage the order they appear on your profile.</p>
+	  </div>
 	</div>
 	<div class="span9">
 		<div class="pull-right">
@@ -26,22 +28,25 @@
 		      <th width="40%">Options</th>
 		    </tr>
 		  </thead>
-		  <tbody>
+		  <tbody id="sortable" data-update-url="<%= sort_articles_url %>">
 		  	<% @articles.each do |a| %>
-		    <tr>
-		      <td><%= link_to a.title, a %></td>
-		      <td><%= truncate(strip_tags(a.content), :length => 25, :separator => ' ') %></td>
-		      <td>
-		      	<%= link_to "Edit", edit_article_path(a), :class => "btn btn-mini" %> 
-		      	<%= link_to "Delete", article_path(a), :class => "btn btn-danger btn-mini", :confirm => "Are you sure you want to delete this article?", :method => :delete %> 
-		      </td>
-		    </tr>
+			    <%= content_tag_for :tr, a do %>
+			      <td><%= link_to a.title, a %></td>
+			      <td><%= truncate(strip_tags(a.content), :length => 25, :separator => ' ') %></td>
+			      <td>
+			      	<%= link_to "Edit", edit_article_path(a), :class => "btn btn-mini" %> 
+			      	<%= link_to "Delete", article_path(a), :class => "btn btn-danger btn-mini", :confirm => "Are you sure you want to delete this article?", :method => :delete %> 
+			      </td>
+			    <% end %>
 		    <% end %>
 
 		  </tbody>
 		</table>
 		<% if @articles.empty? %>
-			<div class="alert alert-warning">There are no articles. <%= link_to "Click here", new_article_path %> to get started. <a class="close" data-dismiss="alert" href="#">×</a></div>
+			<div class="alert alert-info">
+				<a class="close" data-dismiss="alert" href="#">×</a>
+        		You have no articles. It is really easy to get started! <%= link_to "<i class='icon-plus'></i> Click here to create your first article.".html_safe, new_article_path %>
+			</div>
 		<% end %>
 
 	</div>

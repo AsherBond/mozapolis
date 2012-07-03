@@ -1,10 +1,22 @@
+<%= provide(:title, @gallery.title) %>
+<div class="row">
+  <div class="span12">
+    <ul class="breadcrumb">
+      <li>
+        <%= link_to_icon "user", @gallery.artist.artist_name, @gallery.artist %>
+        <span class="divider">/</span>
+      </li>
+
+      <li class="active"><i class="icon-camera"></i> Viewing Gallery: <strong><%= @gallery.title %></strong></li>
+    </ul>
+  </div>
+</div>
 <div class="row">
 	<div class="span6">
-		<h2><%= @gallery.title %> Images</h2>
 		<ul class="thumbnails">
 			<% @images.each do |img| %>
-			<li class="span3">
-				<%= link_to(image_tag(img.file.url(:medium)), gallery_image_path(img), :class => "thumbnail") %>
+			<li class="span2">
+				<%= link_to(image_tag(img.file.url(:medium)), gallery_image_path(@gallery,img), :class => "thumbnail") %>
 			</li>
 			<% end %>
 		</ul>

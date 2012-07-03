@@ -1,0 +1,30 @@
+<%= provide(:title, 'Editing Event: '+ @event.title) %>
+<div class="row">
+
+	<div class="span6 offset3">
+
+	    <ul class="breadcrumb">
+			  <li>
+			    <%= link_to_icon "lock", "Top Secret", admin_path %> <span class="divider">/</span>
+			  </li>
+			  <li>
+			    <%= link_to_icon "flag", "Manage Events", admin_events_path %> <span class="divider">/</span>
+			  </li>
+			  <li class="active"><i class="icon-edit"></i> Editing Event: <strong><%= link_to @event.title %></strong></li>
+	    </ul>
+
+		<div class="well">
+			<%= render :partial => 'form' %>
+		</div>
+
+	</div>
+
+	<div class="span3">
+		<h6>Current Image</h6>
+		<% if @event.photo.file? %>
+			<p><%= image_tag @event.photo.url(:medium) %></p>
+		<% else %>
+			<p>Please upload an event image.</p>
+		<% end %>
+	</div>
+</div>

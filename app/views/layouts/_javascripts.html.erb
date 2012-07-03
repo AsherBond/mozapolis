@@ -14,8 +14,8 @@ $(document).ready(function(){
 	// Some options
 	var	opt_play_first = false, // If true, will attempt to auto-play the default track on page loads. No effect on mobile devices, like iOS.
 		opt_auto_play = true, // If true, when a track is selected, it will auto-play.
-		opt_text_playing = "Now playing:", // Text when playing
-		opt_text_selected = "Selected Track:"; // Text when not playing
+		opt_text_playing = "Playing:", // Text when playing
+		opt_text_selected = ""; // Text when not playing
 
 	// A flag to capture the first track
 	var first_track = true;
@@ -38,10 +38,10 @@ $(document).ready(function(){
 			my_extraPlayInfo.text(parseInt(event.jPlayer.status.currentPercentAbsolute, 10) + "%");
 		},
 		play: function(event) {
-			my_playState.text(opt_text_playing).prepend("<i class='icon-music'></i> ");
+			my_playState.text(opt_text_playing).prepend("<i class='icon-play'></i> ");
 		},
 		pause: function(event) {
-			my_playState.text(opt_text_selected).prepend("<i class='icon-pause'></i> (Paused) ");
+			my_playState.text(opt_text_selected).prepend("<i class='icon-pause'></i> Paused: ");
 		},
 		ended: function(event) {
 			my_playState.text(opt_text_selected);

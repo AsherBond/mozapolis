@@ -2,8 +2,8 @@
 	<label class="btn btn-inverse btn-mini disabled">Background Attachment:</label>
 
 	<label for="<%= prop_id %>-attachment-fixed" class="btn btn-mini<%= " active" if current_artist.attributes[prop_row] ==  "fixed" %>"><i class="icon-move"></i> Fixed</label>
-	<input type="radio" style="display:none" value="fixed" id="<%= prop_id %>-attachment-fixed" name="user[<%= prop_row %>]">
+	<input type="radio" style="display:none" value="fixed" id="<%= prop_id %>-attachment-fixed" name="artist[<%= prop_row %>]">
 
 	<label for="<%= prop_id %>-attachment-scroll" class="btn btn-mini<%= " active" if current_artist.attributes[prop_row] ==  "scroll" %>"><i class="icon-arrow-down"></i> Scroll</label>
-	<input type="radio" style="display:none" value="scroll" id="<%= prop_id %>-attachment-scroll" name="user[<%= prop_row %>]">
+	<input type="radio" style="display:none" value="scroll" id="<%= prop_id %>-attachment-scroll" name="artist[<%= prop_row %>]">
 </div>

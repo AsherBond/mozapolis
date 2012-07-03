@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120629153147) do
+ActiveRecord::Schema.define(:version => 20120702172927) do
 
   create_table "albums", :force => true do |t|
     t.string   "title"
@@ -26,9 +26,11 @@ ActiveRecord::Schema.define(:version => 20120629153147) do
     t.integer  "artwork_file_size"
     t.datetime "artwork_updated_at"
     t.integer  "position"
+    t.string   "slug"
   end
 
   add_index "albums", ["artist_id"], :name => "index_albums_on_artist_id"
+  add_index "albums", ["slug"], :name => "index_albums_on_slug", :unique => true
 
   create_table "articles", :force => true do |t|
     t.string   "title"
@@ -40,9 +42,12 @@ ActiveRecord::Schema.define(:version => 20120629153147) do
     t.string   "photo_content_type"
     t.integer  "photo_file_size"
     t.datetime "photo_updated_at"
+    t.string   "slug"
+    t.integer  "position"
   end
 
   add_index "articles", ["artist_id"], :name => "index_articles_on_artist_id"
+  add_index "articles", ["slug"], :name => "index_articles_on_slug", :unique => true
 
   create_table "artists", :force => true do |t|
     t.string   "email",                                  :default => "",    :null => false
@@ -150,6 +155,7 @@ ActiveRecord::Schema.define(:version => 20120629153147) do
     t.string   "about_background_image_content_type"
     t.integer  "about_background_image_file_size"
     t.datetime "about_background_image_updated_at"
+    t.text     "interests"
   end
 
   add_index "artists", ["email"], :name => "index_artists_on_email", :unique => true
@@ -186,27 +192,47 @@ ActiveRecord::Schema.define(:version => 20120629153147) do
     t.string   "photo_content_type"
     t.integer  "photo_file_size"
     t.datetime "photo_updated_at"
+    t.string   "slug"
+    t.integer  "position"
   end
 
   add_index "events", ["artist_id"], :name => "index_events_on_artist_id"
+  add_index "events", ["slug"], :name => "index_events_on_slug", :unique => true
 
   create_table "fans", :force => true do |t|
-    t.string   "email",                  :default => "", :null => false
-    t.string   "encrypted_password",     :default => "", :null => false
+    t.string   "email",                      :default => "", :null => false
+    t.string   "encrypted_password",         :default => "", :null => false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",          :default => 0
+    t.integer  "sign_in_count",              :default => 0
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
-    t.datetime "created_at",                             :null => false
-    t.datetime "updated_at",                             :null => false
+    t.datetime "created_at",                                 :null => false
+    t.datetime "updated_at",                                 :null => false
+    t.text     "interests"
+    t.text     "favoriteBands"
+    t.text     "about"
+    t.string   "public_email"
+    t.string   "city"
+    t.string   "state"
+    t.string   "zip"
+    t.string   "country"
+    t.string   "profile_image_file_name"
+    t.string   "profile_image_content_type"
+    t.integer  "profile_image_file_size"
+    t.datetime "profile_image_updated_at"
+    t.string   "first_name"
+    t.string   "last_name"
+    t.string   "username"
+    t.string   "slug"
   end
 
   add_index "fans", ["email"], :name => "index_fans_on_email", :unique => true
   add_index "fans", ["reset_password_token"], :name => "index_fans_on_reset_password_token", :unique => true
+  add_index "fans", ["slug"], :name => "index_fans_on_slug", :unique => true
 
   create_table "galleries", :force => true do |t|
     t.string   "title"
@@ -218,9 +244,21 @@ ActiveRecord::Schema.define(:version => 20120629153147) do
     t.string   "cover_content_type"
     t.integer  "cover_file_size"
     t.datetime "cover_updated_at"
+    t.string   "slug"
+    t.integer  "position"
   end
 
   add_index "galleries", ["artist_id"], :name => "index_galleries_on_artist_id"
+  add_index "galleries", ["slug"], :name => "index_galleries_on_slug", :unique => true
+
+  create_table "genres", :force => true do |t|
+    t.string   "name"
+    t.integer  "artist_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "genres", ["artist_id"], :name => "index_genres_on_artist_id"
 
   create_table "images", :force => true do |t|
     t.string   "title"
@@ -232,9 +270,36 @@ ActiveRecord::Schema.define(:version => 20120629153147) do
     t.string   "file_content_type"
     t.integer  "file_file_size"
     t.datetime "file_updated_at"
+    t.string   "slug"
+    t.integer  "position"
   end
 
   add_index "images", ["gallery_id"], :name => "index_images_on_gallery_id"
+  add_index "images", ["slug"], :name => "index_images_on_slug", :unique => true
+
+  create_table "impressions", :force => true do |t|
+    t.string   "impressionable_type"
+    t.integer  "impressionable_id"
+    t.integer  "user_id"
+    t.string   "controller_name"
+    t.string   "action_name"
+    t.string   "view_name"
+    t.string   "request_hash"
+    t.string   "ip_address"
+    t.string   "session_hash"
+    t.text     "message"
+    t.text     "referrer"
+    t.datetime "created_at",          :null => false
+    t.datetime "updated_at",          :null => false
+  end
+
+  add_index "impressions", ["controller_name", "action_name", "ip_address"], :name => "controlleraction_ip_index"
+  add_index "impressions", ["controller_name", "action_name", "request_hash"], :name => "controlleraction_request_index"
+  add_index "impressions", ["controller_name", "action_name", "session_hash"], :name => "controlleraction_session_index"
+  add_index "impressions", ["impressionable_type", "impressionable_id", "ip_address"], :name => "poly_ip_index"
+  add_index "impressions", ["impressionable_type", "impressionable_id", "request_hash"], :name => "poly_request_index"
+  add_index "impressions", ["impressionable_type", "impressionable_id", "session_hash"], :name => "poly_session_index"
+  add_index "impressions", ["user_id"], :name => "index_impressions_on_user_id"
 
   create_table "pages", :force => true do |t|
     t.string   "title"
@@ -245,6 +310,28 @@ ActiveRecord::Schema.define(:version => 20120629153147) do
     t.datetime "created_at",       :null => false
     t.datetime "updated_at",       :null => false
   end
+
+  create_table "playlists", :force => true do |t|
+    t.string   "name"
+    t.integer  "fan_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+    t.string   "slug"
+    t.integer  "position"
+  end
+
+  add_index "playlists", ["fan_id"], :name => "index_playlists_on_fan_id"
+  add_index "playlists", ["slug"], :name => "index_playlists_on_slug", :unique => true
+
+  create_table "ptracks", :force => true do |t|
+    t.integer  "playlist_id"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+    t.integer  "song_id"
+    t.integer  "position"
+  end
+
+  add_index "ptracks", ["playlist_id"], :name => "index_ptracks_on_playlist_id"
 
   create_table "roles", :force => true do |t|
     t.string   "name"
@@ -273,6 +360,7 @@ ActiveRecord::Schema.define(:version => 20120629153147) do
     t.string   "file_content_type"
     t.integer  "file_file_size"
     t.datetime "file_updated_at"
+    t.integer  "position"
   end
 
   add_index "songs", ["album_id"], :name => "index_songs_on_album_id"
@@ -315,8 +403,25 @@ ActiveRecord::Schema.define(:version => 20120629153147) do
     t.string   "file_content_type"
     t.integer  "file_file_size"
     t.datetime "file_updated_at"
+    t.string   "slug"
+    t.integer  "position"
   end
 
   add_index "videos", ["artist_id"], :name => "index_videos_on_artist_id"
+  add_index "videos", ["slug"], :name => "index_videos_on_slug", :unique => true
+
+  create_table "votes", :force => true do |t|
+    t.boolean  "vote",          :default => false
+    t.integer  "voteable_id",                      :null => false
+    t.string   "voteable_type",                    :null => false
+    t.integer  "voter_id"
+    t.string   "voter_type"
+    t.datetime "created_at",                       :null => false
+    t.datetime "updated_at",                       :null => false
+  end
+
+  add_index "votes", ["voteable_id", "voteable_type"], :name => "index_votes_on_voteable_id_and_voteable_type"
+  add_index "votes", ["voter_id", "voter_type", "voteable_id", "voteable_type"], :name => "fk_one_vote_per_user_per_entity", :unique => true
+  add_index "votes", ["voter_id", "voter_type"], :name => "index_votes_on_voter_id_and_voter_type"
 
 end

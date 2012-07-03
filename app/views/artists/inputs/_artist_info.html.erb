@@ -1,1 +1,9 @@
+<h6>Basic Information</h6>
 <%= f.input :artist_name %>
+<h6>Genres</h6>
+<p>Start typing to see the list, if your genre dosent exsist, select new and we'll record it in our database.</p>
+<%= f.input :genre_tokens, :label => false, :input_html => { :data => {:load => @artist.genres} } %>
+<hr>
+<div class="form-actions">
+	<%= f.button :submit, "Save Changes", :class => "btn btn-success" %>
+</div>

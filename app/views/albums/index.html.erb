@@ -1,3 +1,4 @@
+<%= provide(:title, 'Albums Dashboard') %>
 <div class="row">
   <div class="span12">
     <ul class="breadcrumb">
@@ -17,16 +18,6 @@
       <p><i class="icon-upload-alt"></i> You can also drag and drop all your songs and upload them at the same time. You can drop them anywhere you see a drop zone.</p>
     </div>
   </div>
-  <script>
-  $(function() {
-    $( "#sortable" ).sortable({
-      placeholder: 'span3',
-      update: function() {
-        $.post($(this).data('update-url'), $(this).sortable('serialize'));
-      }
-    }).disableSelection();
-  });
-  </script>
   <div class="span9">
     <div class="pull-right">
       <%= link_to "<i class='icon-plus'></i> New Album".html_safe, new_album_path, :class => "btn btn-success" %>
@@ -65,7 +56,7 @@
     <% if @albums.empty? %>
       <div class="alert alert-info">
         <a class="close" data-dismiss="alert">×</a>
-        You have no albums. It is super easy to get started! <%= link_to "<i class='icon-plus'></i> Click here to create your first album.".html_safe, new_album_path %>
+        You have no albums. It is really easy to get started! <%= link_to "<i class='icon-plus'></i> Click here to create your first album.".html_safe, new_album_path %>
       </div>
     <% end %>
   </div>

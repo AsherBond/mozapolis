@@ -9,7 +9,7 @@ class ArtistRegistrationsController < Devise::RegistrationsController
       # Sign in the user bypassing validation in case his password changed
       sign_in current_artist, :bypass => true
       flash[:notice] = "Successfully updated account."
-      redirect_to root_path
+      redirect_to current_artist
     else
       render "edit"
     end

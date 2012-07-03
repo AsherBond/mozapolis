@@ -1,0 +1,16 @@
+<div class="row">
+	<div class="span6 offset3">
+
+		<ul class="breadcrumb">
+		  <li>
+		    <%= link_to_icon "dashboard", "Playlist Dashboard", playlists_path %> <span class="divider">/</span>
+		  </li>
+		  <li class="active"><i class="icon-edit"></i> Editing Playlist: <strong><%= link_to @playlist.name, @playlist %></strong></li>
+		</ul>	
+
+		<div class="well">
+			<%= render :partial => 'form' %>
+		</div>
+	</div>
+
+</div>

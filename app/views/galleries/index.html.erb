@@ -1,3 +1,4 @@
+<%= provide(:title, 'Manage Galleries') %>
 <div class="row">
   	<div class="span12">
     	<ul class="breadcrumb">
@@ -19,31 +20,36 @@
 			<%= link_to "<i class='icon-plus'></i> New Gallery".html_safe, new_gallery_url, :class => "btn btn-success" %>
 		</div>
 		<h2>Galleries</h2>
-		<ul class="thumbnails">
+		<ul id="sortable" data-update-url="<%= sort_galleries_url %>" class="thumbnails">
 			<% @galleries.each do |gallery| %>
-			<li class="span3">
-				<div class="thumbnail">
-					<%= image_tag(gallery.cover.url(:medium)) %>
-					<div class="caption">
-						<h5><%= link_to gallery.title, gallery %></h5>
-						<p>
-			            	<%= link_to "<i class='icon-wrench'></i>".html_safe, gallery_images_path(gallery), :class => "btn btn-mini btn-inverse", :rel => "tooltip", :title => "Gallery manager, you can edit and upload images here." %>
-			            	<%= link_to "<i class='icon-plus'></i>".html_safe, new_gallery_image_path(gallery), :class => "btn btn-mini btn-success", :rel => "tooltip", :title => "Add a new image to the gallery." %>
-			            	<%= link_to "<i class='icon-edit'></i>".html_safe, edit_gallery_path(gallery), :class => 'btn btn-mini btn-info', :rel => "tooltip", :title =>  "Edit gallery details and cover image."  %>
-			            	<%= link_to "<i class='icon-remove'></i>".html_safe,
-			            	            gallery_path(gallery),
-			            	            :method => :delete,
-			            	            :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')),
-			            	            :class => 'btn btn-mini btn-danger',
-			            	            :rel => "tooltip", :title => "Delete this gallery forever." %>
-			            </p>
-   			</li>
+				<%= content_tag_for :li, gallery, :class => "span3" do %>
+					<div class="thumbnail">
+						<%= image_tag(gallery.cover.url(:medium)) %>
+						<div class="caption">
+							<h5><%= link_to gallery.title, gallery %></h5>
+							<p>
+				            	<%= link_to "<i class='icon-wrench'></i>".html_safe, gallery_images_path(gallery), :class => "btn btn-mini btn-inverse", :rel => "tooltip", :title => "Gallery manager, you can edit and upload images here." %>
+				            	<%= link_to "<i class='icon-plus'></i>".html_safe, new_gallery_image_path(gallery), :class => "btn btn-mini btn-success", :rel => "tooltip", :title => "Add a new image to the gallery." %>
+				            	<%= link_to "<i class='icon-edit'></i>".html_safe, edit_gallery_path(gallery), :class => 'btn btn-mini btn-info', :rel => "tooltip", :title =>  "Edit gallery details and cover image."  %>
+				            	<%= link_to "<i class='icon-remove'></i>".html_safe,
+				            	            gallery_path(gallery),
+				            	            :method => :delete,
+				            	            :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')),
+				            	            :class => 'btn btn-mini btn-danger',
+				            	            :rel => "tooltip", :title => "Delete this gallery forever." %>
+				            </p>
+				<% end %>
 			<% end %>
 		</ul>
 		<% if @galleries.empty? %>
 			<div class="alert alert-info">
-				You have no galleries yet, do you want to create one now? <%= link_to_icon "plus", "Click Here", new_gallery_url %>
+        		You have no galleries. It is really easy to get started! <%= link_to "<i class='icon-plus'></i> Click here to create your first gallery.".html_safe, new_gallery_path %>
 			</div>
 		<% end %>
+		<hr>
+	    <div class="dropzone">
+	      <i class="icon-plus"></i>
+	      <p>Drop images here to upload into a new album.</p>
+	    </div>
 	</div>
 </div>

@@ -1,7 +1,12 @@
 class GalleriesController < ApplicationController
-
+  def sort
+    params[:gallery].each_with_index do |id, index|
+      Gallery.update_all({position: index+1}, {id: id})
+    end
+    render nothing: true
+  end
   def index
-    @galleries = Gallery.all
+    @galleries = current_artist.galleries.order(:position)
 
     respond_to do |format|
       format.html # index.html.erb
@@ -69,7 +74,10 @@ class GalleriesController < ApplicationController
     @gallery.destroy
 
     respond_to do |format|
-      format.html { redirect_to galleries_url }
+      format.html { 
+        flash[:error] = "Gallery destroyed."
+        redirect_to galleries_url 
+      }
       format.json { head :no_content }
     end
   end

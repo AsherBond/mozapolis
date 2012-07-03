@@ -2,14 +2,14 @@
 	<label class="btn btn-inverse btn-mini disabled">Background Repeat:</label>
 
 	<label for="<%= prop_id %>-repeat-x" class="btn btn-mini<%= " active" if current_artist.attributes[prop_row] == "repeat-x" %>"><i class="icon-resize-horizontal"></i> Horizontal</label>
-	<input type="radio" style="display:none" value="repeat-x" id="<%= prop_id %>-repeat-x" name="user[<%= prop_row %>]">
+	<input type="radio" style="display:none" value="repeat-x" id="<%= prop_id %>-repeat-x" name="artist[<%= prop_row %>]">
 
 	<label for="<%= prop_id %>-repeat-y" class="btn btn-mini<%= " active" if current_artist.attributes[prop_row] == "repeat-y" %>"><i class="icon-resize-vertical"></i> Vertical</label>
-	<input type="radio" style="display:none" value="repeat-y" id="<%= prop_id %>-repeat-y" name="user[<%= prop_row %>]">
+	<input type="radio" style="display:none" value="repeat-y" id="<%= prop_id %>-repeat-y" name="artist[<%= prop_row %>]">
 
 	<label for="<%= prop_id %>-no-repeat" class="btn btn-mini<%= " active" if current_artist.attributes[prop_row] == "no-repeat" %>"><i class="icon-remove"></i> None</label>
-	<input type="radio" style="display:none" value="no-repeat" id="<%= prop_id %>-no-repeat" name="user[<%= prop_row %>]">
+	<input type="radio" style="display:none" value="no-repeat" id="<%= prop_id %>-no-repeat" name="artist[<%= prop_row %>]">
 
 	<label for="<%= prop_id %>-repeat-both" class="btn btn-mini<%= " active" if current_artist.attributes[prop_row] ==  "" %>"><i class="icon-remove"></i> Both</label>
-	<input type="radio" style="display:none" value="" id="<%= prop_id %>-repeat-both" name="user[<%= prop_row %>]">
+	<input type="radio" style="display:none" value="" id="<%= prop_id %>-repeat-both" name="artist[<%= prop_row %>]">
 </div>

@@ -1,3 +1,4 @@
+<%= provide(:title, 'Videos Dashboard') %>
 <div class="row">
   <div class="span12">
     <ul class="breadcrumb">
@@ -15,43 +16,38 @@
       <p><i class="icon-upload-alt"></i> You can also drag and drop all your videos and upload them at the same time. You can drop them anywhere you see a drop zone.</p>
     </div>
   </div>
-  <script>
-  $(function() {
-    $( "#sortable" ).sortable({
-      placeholder: 'span3',
-      update: function() {
-        $.post($(this).data('update-url'), $(this).sortable('serialize'));
-      }
-    }).disableSelection();
-  });
-  </script>
+
   <div class="span9">
     <div class="pull-right">
       <%= link_to "<i class='icon-plus'></i> New Video".html_safe, new_video_path, :class => "btn btn-success" %>
     </div>
     <h2>My Videos</h2>
-    <ul id="sortable" data-update-url="test" class="thumbnails">
+    <ul id="sortable" data-update-url="<%= sort_videos_url %>" class="thumbnails">
       <% @videos.each do |video| %>
-      <li class="span3">
-        <div class="thumbnail">
-          <img src="http://placehold.it/360x215" />
-          
-          <div class="caption">
-            <h5><%= link_to video.title, video %></h5>
-            <p>
-              <%= link_to "<i class='icon-edit'></i>".html_safe, edit_video_path(video), :class => 'btn btn-mini btn-info', :rel => "tooltip", :title =>  "Edit video details."  %>
+        <%= content_tag_for :li, video, :class => "span3" do %>
+          <div class="thumbnail">
+          <video class="video-js vjs-default-skin" controls
+            preload="auto" width="100%"
+            data-setup="{}">
+            <source src="<%= video.file.url %>" type='video/mp4'>
+          </video>
+            
+            <div class="caption">
+              <h5><%= link_to video.title, video %></h5>
+              <p>
+                <%= link_to "<i class='icon-edit'></i>".html_safe, edit_video_path(video), :class => 'btn btn-mini btn-info', :rel => "tooltip", :title =>  "Edit video details."  %>
 
-              <%= link_to "<i class='icon-remove'></i>".html_safe,
-                          video_path(video),
-                          :method => :delete,
-                          :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')),
-                          :class => 'btn btn-mini btn-danger',
-                          :rel => "tooltip",
-                          :title => "Delete this video forever." %>
-            </p>
+                <%= link_to "<i class='icon-remove'></i>".html_safe,
+                            video_path(video),
+                            :method => :delete,
+                            :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')),
+                            :class => 'btn btn-mini btn-danger',
+                            :rel => "tooltip",
+                            :title => "Delete this video forever." %>
+              </p>
+            </div>
           </div>
-        </div>
-      </li>
+        <% end %>
       <% end %>
 
     </ul>
@@ -61,6 +57,11 @@
         You have no videos. It is super easy to get started! <%= link_to "<i class='icon-plus'></i> Click here to create your first video.".html_safe, new_video_path %>
       </div>
     <% end %>
+    <hr>
+    <div class="dropzone">
+      <i class="icon-plus"></i>
+      <p>Drop videos here to upload.</p>
+    </div>
   </div>
 
 </div>

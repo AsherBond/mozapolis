@@ -1,7 +1,7 @@
 class ArtistsController < ApplicationController
 
   # load_and_authorize_resource :only =>  [:albumdashboard, :videodashboard, :songdashboard]
-
+  impressionist :unique => [:controller_name, :action_name, :session_hash], :actions => [:show]
   def index 
     #gon.users = User.all.map &:artist_name
   	@artists = Artist.text_search(params[:query]).page(params[:page]).per_page(3)
@@ -11,12 +11,13 @@ class ArtistsController < ApplicationController
   def show
 
     @artist = Artist.find(params[:id])
+    impressionist(@artist, :unique => [:controller_name, :action_name, :session_hash])
 
-    @albums = @artist.albums
-    @videos = @artist.videos
-    @articles = @artist.articles
-    @galleries = @artist.galleries
-    @events = @artist.events
+    @albums = @artist.albums.order(:position)
+    @videos = @artist.videos.order(:position)
+    @articles = @artist.articles.order(:position)
+    @galleries = @artist.galleries.order(:position)
+    @events = @artist.events.order(:position)
 
     first_album = Album.where(:artist_id => @artist.id).order(:position).first
     @songs = first_album.songs

@@ -1,12 +1,19 @@
 class ArticlesController < ApplicationController
-
+  def sort
+    params[:article].each_with_index do |id, index|
+      Article.update_all({position: index+1}, {id: id})
+    end
+    render nothing: true
+  end
   def index
-    @articles = Article.where(:artist_id => current_artist)
+    @articles = Article.where(:artist_id => current_artist).order(:position)
 
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @articles }
     end
+  end
+  def albums
   end
 
   def show

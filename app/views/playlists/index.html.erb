@@ -1,0 +1,51 @@
+<%= provide(:title, 'Playlist Dashboard') %>
+<div class="row">
+  <div class="span12">
+    <ul class="breadcrumb">
+      <li class="active"><i class="icon-dashboard"></i> Playlist Dashboard</li>
+    </ul> 
+  </div>
+</div>
+
+<div class="row">
+	<div class="span3">
+	  <div class="well">
+	    <h4><i class="icon-umbrella"></i> Welcome to the playlist manager, we make it pretty easy and fun to manage your playlists.</h4>
+	    <hr>
+	    <p><i class="icon-move"></i> You can drag and drop your songs to arrage the order they play on your playlist.</p>
+	  </div>
+	</div>
+	<div class="span9">
+		<div class="pull-right">
+			<%= link_to "<i class='icon-plus'></i> New Playlist".html_safe, new_playlist_path, :class => "btn btn-success" %>
+		</div>
+		<h2>My Playlists</h2>
+		<table class="table table-striped table-bordered">
+		  <thead>
+		    <tr>
+		      <th width="60%">Name</th>
+		      <th width="40%">Options</th>
+
+		    </tr>
+		  </thead>
+		  <tbody id="sortable" data-update-url="<%= sort_playlists_url %>">
+		  	<% @playlists.each do |playlist| %>
+			    <%= content_tag_for :tr, playlist do %>
+			      <td><%= link_to playlist.name, playlist %></td>
+			      <td>
+			      	<%= link_to "Edit", edit_playlist_path(playlist), :class => "btn btn-mini" %> 
+			      	<%= link_to "Delete", playlist_path(playlist), :class => "btn btn-danger btn-mini", :confirm => "Are you sure you want to delete this playlist?", :method => :delete %> 
+			      </td>
+			    <% end %>
+		    <% end %>
+
+		  </tbody>
+		</table>
+		<% if @playlists.empty? %>
+			<div class="alert alert-info">
+				<a class="close" data-dismiss="alert" href="#">×</a>
+        		You have no playlist. It is really easy to get started! <%= link_to "<i class='icon-plus'></i> Click here to create your first playlist.".html_safe, new_playlist_path %>
+			</div>
+		<% end %>
+	</div>
+</div>

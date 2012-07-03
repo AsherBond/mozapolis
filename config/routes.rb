@@ -11,8 +11,12 @@ Mozapolis::Application.routes.draw do
 
   # Fans
   #-----
-  devise_for :fans, :skip => [:sessions]
   devise_for :fans, :controllers => { :registrations => :fan_registrations }
+  resources :fans, :only => [:show, :index]
+  resources :fans do 
+    resources :comments
+  end
+
 
   as :fan do
     get    'fan/signin'  => 'devise/sessions#new',     :as => :new_fan_session
@@ -42,35 +46,62 @@ Mozapolis::Application.routes.draw do
 
   # Engines
   #--------
+  
+  resources :playlists do
+    collection { post :sort }
+    resources :ptracks do 
+      collection { post :addsong }
+    end
+  end
   resources :genres
   resources :pictures, :only => [:index, :create, :destroy]
   resources :videos do
+    collection { post :sort }
     resources :comments
   end
 
   resources :events do
+    collection { post :sort }
     resources :comments
   end
   resources :articles do
+    collection { post :sort }
     resources :comments
   end
 
   resources :galleries do
+    collection { post :sort }
     resources :comments
     resources :images
   end
- 
+  resources :images do 
+    collection { post :sort }
+    resources :comments
+  end
   resources :albums do
     collection { post :sort }
+    collection { post :upvote }
+    collection { post :downvote }
+    collection { post :unvote }
     resources :comments
     resources :songs
   end
 
+  
+  resources :songs do
+    resources :comments
+    collection { post :sort }
+    collection { post :upvote }
+    collection { post :downvote }
+    collection { post :unvote }
+  end
   # Admin Routes
   #-------------
 
   namespace :admin do
     resources :articles
+    resources :events
+    resources :galleries
   end
 
 

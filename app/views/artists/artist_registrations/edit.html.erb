@@ -1,24 +1,19 @@
+
+
 <div class="row">
-  <div class="span8 offset2">
-    <ul class="nav nav-pills" id="edit-profile-tabs">
+  <div class="span3 offset1">
+    <ul id="edit-profile-links" class="nav nav-pills nav-stacked" id="edit-profile-tabs">
       <li class="active"><a href="#personal" data-toggle="tab"><i class="icon-user"></i> Personal</a></li>
       <li><a href="#artist-info" data-toggle="tab"><i class="icon-headphones"></i> Artist Info</a></li>
       <li><a href="#profile-image" data-toggle="tab"><i class="icon-picture"></i> Profile Image</a></li>
-      <li><a href="#email" data-toggle="tab"><i class="icon-envelope"></i> Email</a></li>
+      <li><a href="#email" data-toggle="tab"><i class="icon-envelope-alt"></i> Email</a></li>
       <li><a href="#location" data-toggle="tab"><i class="icon-map-marker"></i> Location</a></li>
       <li><a href="#password" data-toggle="tab"><i class="icon-key"></i> Password</a></li>
       <li><a href="#customize" data-toggle="tab"><i class="icon-edit"></i> Customize!</a></li>
     </ul>
   </div>
-</div>
-
-<div class="row">
-  <div class="span2">
-    <h4>Editing your profile is easier than ever.</h4>
-    <p>Go directly to what you want to edit or update with just a couple clicks.</p>
-  </div>
-  <div class="span8">
-    <%= simple_form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put, :class => "form-horizontal" }) do |f| %>
+  <div class="span7">
+    <%= simple_form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put, :class => "form-vertical" }) do |f| %>
 
     <p style="margin:00;padding:00;">
       <h6 style="margin:00;padding:00;">
@@ -31,99 +26,99 @@
     <div class="tab-content">
 
       <div class="well tab-pane active" id="personal">
-        <h2 class="hb">Edit Personal Information</h2>
+        <h2>Edit Personal Information</h2>
         <%= render :partial => 'artists/inputs/personal', :locals => { :f => f } %>
       </div>
 
       <div class="well tab-pane" id="artist-info">
-        <h2 class="hb">Edit Artist Information</h2>
+        <h2>Edit Artist Information</h2>
         <%= render :partial => 'artists/inputs/artist_info', :locals => { :f => f } %>
       </div>
 
       <div class="well tab-pane" id="profile-image">
-        <h2 class="hb">Profile Image</h2>
+        <h2>Profile Image</h2>
         <%= render :partial => 'artists/inputs/profile_image', :locals => { :f => f } %>
       </div>
 
       <div class="well tab-pane" id="email">
-        <h2 class="hb">Edit Email Information</h2>
+        <h2>Edit Email Information</h2>
         <%= render :partial => 'artists/inputs/email', :locals => { :f => f } %>
       </div>
 
       <div class="well tab-pane" id="location">
-        <h2 class="hb">Edit Location Information</h2>
+        <h2>Edit Location Information</h2>
         <%= render :partial => 'artists/inputs/location', :locals => { :f => f } %>
       </div>
 
       <div class="well tab-pane" id="password">
-        <h2 class="hb">Update Password</h2>
+        <h2>Update Password</h2>
         <%= render :partial => 'artists/inputs/passwords', :locals => { :f => f } %>
       </div>
 
       <div class="well tab-pane" id="cancel">
-        <h2 class="hb">Cancel my account</h2>
+        <h2>Cancel my account</h2>
         <p>Unhappy? <%= link_to "Cancel my account", registration_path(resource_name), :confirm => "Are you sure?", :method => :delete, :class => "btn btn-danger" %>.</p>
       </div>
 
       <div class="well tab-pane" id="customize">
-        <h2 class="hb">Customize Profile</h2>
+        <h2>Customize Profile</h2>
 
-        <h3 class="hb"><a data-toggle="collapse" data-target="#change-body"><i class="icon-lemon"></i> Body</a></h3>
+        <h2><a data-toggle="collapse" data-target="#change-body"><i class="icon-lemon"></i> Body</a></h2>
         <div id="change-body" class="collapse out">
           <%= render :partial => 'artists/inputs/body', :locals => { :f => f } %>
           <hr>
         </div>
 
-        <h3 class="hb"><a data-toggle="collapse" data-target="#change-nav"><i class="icon-road"></i> Navigation Menu</a></h3>
+        <h2><a data-toggle="collapse" data-target="#change-nav"><i class="icon-road"></i> Navigation Menu</a></h2>
         <div id="change-nav" class="collapse out">
           <%= render :partial => 'artists/inputs/nav', :locals => { :f => f } %>
           <hr>
         </div>
 
-        <h3 class="hb"><a data-toggle="collapse" data-target="#change-main"><i class="icon-star"></i> Main Box</a></h3>
+        <h2><a data-toggle="collapse" data-target="#change-main"><i class="icon-star"></i> Main Box</a></h2>
         <div id="change-main" class="collapse out">
           <%= render :partial => 'artists/inputs/main', :locals => { :f => f } %>
           <hr>
         </div>
 
-        <h3 class="hb"><a data-toggle="collapse" data-target="#change-thumbnails"><i class="icon-th-large"></i> Thumbnails</a></h3>
+        <h2><a data-toggle="collapse" data-target="#change-thumbnails"><i class="icon-th-large"></i> Thumbnails</a></h2>
         <div id="change-thumbnails" class="collapse out">
           <%= render :partial => 'artists/inputs/thumbnails', :locals => { :f => f } %>
           <hr>
         </div>
 
-        <h3 class="hb"><a data-toggle="collapse" data-target="#change-tables"><i class="icon-list-alt"></i> Tables</a></h3>
+        <h2><a data-toggle="collapse" data-target="#change-tables"><i class="icon-list-alt"></i> Tables</a></h2>
         <div id="change-tables" class="collapse out">
           <%= render :partial => 'artists/inputs/tables', :locals => { :f => f } %>
           <hr>
         </div>
 
-        <h3 class="hb"><a data-toggle="collapse" data-target="#change-comments"><i class="icon-comments"></i> Comments</a></h3>
+        <h2><a data-toggle="collapse" data-target="#change-comments"><i class="icon-comments"></i> Comments</a></h2>
         <div id="change-comments" class="collapse out">
           <%= render :partial => 'artists/inputs/comments', :locals => { :f => f } %>
           <hr>
         </div>
 
-        <h3 class="hb"><a data-toggle="collapse" data-target="#change-news"><i class="icon-list"></i> News</a></h3>
+        <h2><a data-toggle="collapse" data-target="#change-news"><i class="icon-list"></i> News</a></h2>
         <div id="change-news" class="collapse out">
           <%= render :partial => 'artists/inputs/news', :locals => { :f => f } %>
           <hr>
         </div>
 
-        <h3 class="hb"><a data-toggle="collapse" data-target="#change-about"><i class="icon-user"></i> About</a></h3>
+        <h2><a data-toggle="collapse" data-target="#change-about"><i class="icon-user"></i> About</a></h2>
         <div id="change-about" class="collapse out">
           <%= render :partial => 'artists/inputs/about', :locals => { :f => f } %>
           <hr>
         </div>
-
+  
+      <hr>
+      <div class="form-actions">
+        <%= f.button :submit, "Save Changes", :class => "btn btn-success" %>
+      </div>
       </div>
     </div>
 
     <% end %>
-  </div>
-  <div class="span2">
-    <h4>Artist Only Features</h4>
-    <p>We noticed you've signed up for an artist account, so be sure to check out all our features, including customizing all aspects of your profile in the customize tab.</p>
   </div>
 </div>
  

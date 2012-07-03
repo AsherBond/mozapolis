@@ -1,44 +1,118 @@
-<div id="profile-songs">
+    <!---->
+    <div id="moz_player"></div>
 
-      <table class="table table-bordered">
-        <thead>
-          <tr>
-            <th width="50%">Song Title</th>
-            <th width="20%">Vote</th>
-            <th width="10%">Plays</th>
-            <th width="20%">Comments</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td><a href="http://www.jplayer.org/audio/mp3/TSP-01-Cro_magnon_man.mp3" class="track track-default">Cro Magnon Man</a></td>
-            <td>
-              <a href="#" class="btn btn-mini btn-success"><i class="icon-circle-arrow-up"></i></a>
-              <a href="#" class="btn btn-mini btn-danger"><i class="icon-circle-arrow-down"></i></a>
-            </td>
-            <td>2,325</td>
-            <td><%= link_to "Add Comment (34)", root_path %></td>
-          </tr>
-          <tr>
-            <td><%= link_to "Song Name", root_path %></td>
-            <td>
-              <a href="#" class="btn btn-mini btn-success"><i class="icon-circle-arrow-up"></i></a>
-              <a href="#" class="btn btn-mini btn-danger"><i class="icon-circle-arrow-down"></i></a>
-            </td>
-            <td>2,325</td>
-            <td><%= link_to "Add Comment (34)", root_path %></td>
-          </tr>
-          <tr>
-            <td><%= link_to "Song Name", root_path %></td>
-            <td>
-              <a href="#" class="btn btn-mini btn-success"><i class="icon-circle-arrow-up"></i></a>
-              <a href="#" class="btn btn-mini btn-danger"><i class="icon-circle-arrow-down"></i></a>
-            </td>
-            <td>2,325</td>
-            <td><%= link_to "Add Comment (34)", root_path %></td>
-          </tr>
+    <div id="moz_player_container">
 
-        </tbody>
-      </table>
+        <div id="profile-player" class="btn-group">
+          <button class="btn btn-large btn-danger disabled">
+            <i class="icon-headphones"></i>
+          </button>
+          <a href="#" class="jp-play btn btn-large btn-warning" rel="tooltip" title="Play selected track.">
+            <i class="icon-play"></i> 
+          </a>
+          <a href="#" class="jp-pause btn btn-large btn-warning" rel="tooltip" title="Pause selected track.">
+            <i class="icon-pause"></i> 
+          </a>
+          <a href="#" class="jp-stop btn btn-large btn-warning"  rel="tooltip" title="Stop selected track.">
+            <i class="icon-stop"></i> 
+          </a>
+          <a href="#" class="jp-mute btn btn-large btn-info"  rel="tooltip" title="Mute.">
+            <i class="icon-volume-off"></i> 
+          </a>
+          <a href="#" class="jp-unmute btn btn-large disabled btn-inverse" rel="tooltip" title="Unmute.">
+            <i class="icon-volume-down"></i> 
+          </a>
+          <a href="#" class="jp-volume-max btn btn-large btn-info" rel="tooltip" title="Max out volume.">
+            <i class="icon-volume-up"></i> 
+          </a>
+          <button class="btn btn-large disabled">
+             <span class="play-state"></span> 
+             <strong><span class="track-name"></span></strong> -
+             <span class="jp-current-time"></span>:<span class="jp-duration"></span>
+          </button>
+        </div>
 
-</div>
+        <table class="table table-bordered">
+            <thead>
+              <tr>
+                <th width="50%">Song Title</th>
+                <th width="20%">Vote</th>
+                <th width="10%">Plays</th>
+                <th width="20%">Comments</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% @ptracks.each do |ptrack| song = Song.find(ptrack.song_id) %>
+                <tr>
+                    <td>
+                      <%= link_to song.title, song.file.url, :class => "track track-default" %>
+
+                    </td>
+                    <td>
+                      <% if artist_signed_in? %>
+                        <% if current_artist.voted_on?(song) %>
+                          <%= link_to "#{song.votes_for} <i class='icon-thumbs-up'></i>".html_safe, upvote_songs_url("song_id" => song.id), :method => :post, :class => " vote btn disabled btn-mini btn-success" %>
+                          <%= link_to "#{song.votes_against} <i class='icon-thumbs-down'></i>".html_safe, downvote_songs_url("song_id" => song.id), :method => :post, :class => " vote disabled btn btn-mini btn-danger" %>
+                          <%= link_to "<i class='icon-remove'></i>".html_safe, unvote_songs_url("song_id" => song.id), :method => :post, :class => "btn btn-mini btn-inverse" %>
+                        <% else %>
+                          <%= link_to "#{song.votes_for} <i class='icon-thumbs-up'></i>".html_safe, upvote_songs_url("song_id" => song.id), :method => :post, :class => " vote btn btn-mini btn-success" %>
+                          <%= link_to "#{song.votes_against} <i class='icon-thumbs-down'></i>".html_safe, downvote_songs_url("song_id" => song.id), :method => :post, :class => " vote btn btn-mini btn-danger" %>
+                        <% end %>
+                      <% elsif %>
+                        <% if current_fan.voted_on?(song) %>
+                          <%= link_to "#{song.votes_for} <i class='icon-thumbs-up'></i>".html_safe, upvote_songs_url("song_id" => song.id), :method => :post, :class => " vote btn disabled btn-mini btn-success" %>
+                          <%= link_to "#{song.votes_against} <i class='icon-thumbs-down'></i>".html_safe, downvote_songs_url("song_id" => song.id), :method => :post, :class => " vote disabled btn btn-mini btn-danger" %>
+                          <%= link_to "<i class='icon-remove'></i>".html_safe, unvote_songs_url("song_id" => song.id), :method => :post, :class => "btn btn-mini btn-inverse" %>
+                        <% else %>
+                          <%= link_to "#{song.votes_for} <i class='icon-thumbs-up'></i>".html_safe, upvote_songs_url("song_id" => song.id), :method => :post, :class => " vote btn btn-mini btn-success" %>
+                          <%= link_to "#{song.votes_against} <i class='icon-thumbs-down'></i>".html_safe, downvote_songs_url("song_id" => song.id), :method => :post, :class => " vote btn btn-mini btn-danger" %>
+                        <% end %>
+                      <% end %>
+                    </td>
+                    <td>2,325</td>
+                    <td><%= link_to "<i class='icon-comments'></i> Add Comment (#{song.comments.count})".html_safe, "#song_#{song.id}", :data => { :toggle => :modal} %></td>
+                </tr>
+                <% end %>
+
+            </tbody>
+        </table>
+
+    </div>
+
+    <!---->
+    <% @ptracks.each do |ptrack| song = Song.find(ptrack.song_id) %>
+      <div class="modal hide fade" id="song_<%= song.id %>">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">×</button>
+          <h3><%= song.title %> Comments</h3>
+        </div>
+        <div class="modal-body">
+          <% song.comments.each do |comment| %>
+            <blockquote>
+              <p><%= comment.content %></p>
+              <small>
+                <% if comment.poster_type == "artist" %>
+                  <%= link_to comment.artist.artist_name, "#" %> 
+                <% else %>
+                  <%= link_to comment.fan.email, "#" %> 
+                <% end %>
+                    
+                on <%= comment.created_at.strftime('%b %d, %Y at %H:%M') %>
+              </small>
+            </blockquote>
+          <% end %>
+          <% if song.comments.empty? %>
+            <div class="alert alert-warning">There are no comments. Be the first! <a class="close" data-dismiss="alert" href="#">×</a></div>
+          <% end %>
+
+        </div>
+        <div class="modal-footer">
+          <h6>Leave  your own comment</h6>
+          <%= simple_form_for [song, Comment.new] do |f| %>
+              <%= f.error_notification %>
+              <%= f.input :content, :label => false, :as => :text, :input_html => {:class => "span5", :rows => 2}  %>
+            <%= f.submit "Submit Comment", :class => "btn btn-primary" %>
+          <% end %>
+        </div>
+      </div>
+    <% end %>

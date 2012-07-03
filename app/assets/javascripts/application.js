@@ -17,6 +17,8 @@
 //= require twitter/bootstrap
 //= require bootstrap
 //= require jscolor
-//= require chosen-jquery
 //= require jq.token
 //= require jquery.jplayer.min
+//= require bootstrap-datepicker
+//= require genres
+//= require sortable

@@ -1,0 +1,19 @@
+<%= provide(:title, 'Playlist: '+@playlist.name) %>
+<div class="row">
+  <div class="span12">
+    <ul class="breadcrumb">
+      <li>
+        <%= link_to_icon "user", @playlist.fan.email, @playlist.fan %> <span class="divider">/</span>
+      </li>
+      <li class="active"><i class="icon-reorder"></i> <%= @playlist.name %></li>
+    </ul> 
+  </div>
+</div>
+<div class="row">
+	<div class="span6">
+		<%= render 'shared/playlist' %>
+	</div>
+	<div class="span6">
+		<h2>Comments</h2>
+	</div>
+</div>

@@ -1,0 +1,12 @@
+<%= f.input :profile_image %>
+<hr>
+<% if current_fan.profile_image.file? %>
+
+	<h6>Current Image</h6>
+	<%= image_tag current_fan.profile_image.url(:small) %>
+
+<% end %>
+<hr>
+<div class="form-actions">
+	<%= f.button :submit, "Save Changes", :class => "btn btn-success" %>
+</div>

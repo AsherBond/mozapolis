@@ -1,41 +1,41 @@
 <div class="btn-group" data-toggle="buttons-radio">
 	<label class="btn btn-inverse btn-mini disabled">Background Repeat:</label>
 
-	<label for="<%= prop_id %>-repeat-x" class="btn btn-mini<%= is_active("repeat-x,"main_background_repeat") %>"><i class="icon-resize-horizontal"></i> Horizontal</label>
-	<input type="radio" style="display:none" value="repeat-x" id="<%= prop_id %>-repeat-x" name="user[main_background_repeat]">
+	<label for="<%= prop_id %>-repeat-x" class="btn btn-mini<%= is_active("repeat-x","main_background_repeat") %>"><i class="icon-resize-horizontal"></i> Horizontal</label>
+	<input type="radio" style="display:none" value="repeat-x" id="<%= prop_id %>-repeat-x" name="artist[main_background_repeat]">
 
-	<label for="<%= prop_id %>-repeat-y" class="btn btn-mini<%= " active" if current_user.main_background_repeat == "repeat-y" %>"><i class="icon-resize-vertical"></i> Vertical</label>
-	<input type="radio" style="display:none" value="repeat-y" id="<%= prop_id %>-repeat-y" name="user[main_background_repeat]">
+	<label for="<%= prop_id %>-repeat-y" class="btn btn-mini<%= " active" if current_artist.main_background_repeat == "repeat-y" %>"><i class="icon-resize-vertical"></i> Vertical</label>
+	<input type="radio" style="display:none" value="repeat-y" id="<%= prop_id %>-repeat-y" name="artist[main_background_repeat]">
 
-	<label for="<%= prop_id %>-no-repeat" class="btn btn-mini<%= " active" if current_user.main_background_repeat == "repeat-none" %>"><i class="icon-remove"></i> None</label>
-	<input type="radio" style="display:none" value="no-repeat" id="<%= prop_id %>-no-repeat" name="user[main_background_repeat]">
+	<label for="<%= prop_id %>-no-repeat" class="btn btn-mini<%= " active" if current_artist.main_background_repeat == "repeat-none" %>"><i class="icon-remove"></i> None</label>
+	<input type="radio" style="display:none" value="no-repeat" id="<%= prop_id %>-no-repeat" name="artist[main_background_repeat]">
 
-	<label for="<%= prop_id %>-repeat-both" class="btn btn-mini<%= " active" if current_user.main_background_repeat == "" %>"><i class="icon-remove"></i> Both</label>
-	<input type="radio" style="display:none" value="" id="<%= prop_id %>-repeat-both" name="user[main_background_repeat]">
+	<label for="<%= prop_id %>-repeat-both" class="btn btn-mini<%= " active" if current_artist.main_background_repeat == "" %>"><i class="icon-remove"></i> Both</label>
+	<input type="radio" style="display:none" value="" id="<%= prop_id %>-repeat-both" name="artist[main_background_repeat]">
 </div>
 <hr>
 <div class="btn-group" data-toggle="buttons-radio">
 	<label class="btn btn-inverse btn-mini disabled">Background Position:</label>
 
-	<label for="<%= prop_id %>-position-top" class="btn btn-mini<%= " active" if current_user.main_background_position == "top" %>"><i class="icon-arrow-up"></i> Top</label>
-	<input type="radio" style="display:none" value="top" id="<%= prop_id %>-position-top" name="user[main_background_position]">
+	<label for="<%= prop_id %>-position-top" class="btn btn-mini<%= " active" if current_artist.main_background_position == "top" %>"><i class="icon-arrow-up"></i> Top</label>
+	<input type="radio" style="display:none" value="top" id="<%= prop_id %>-position-top" name="artist[main_background_position]">
 
-	<label for="<%= prop_id %>-position-bottom" class="btn btn-mini<%= " active" if current_user.main_background_position == "bottom" %>"><i class="icon-arrow-down"></i> Bottom</label>
-	<input type="radio" style="display:none" value="bottom" id="<%= prop_id %>-position-bottom" name="user[main_background_position]">
+	<label for="<%= prop_id %>-position-bottom" class="btn btn-mini<%= " active" if current_artist.main_background_position == "bottom" %>"><i class="icon-arrow-down"></i> Bottom</label>
+	<input type="radio" style="display:none" value="bottom" id="<%= prop_id %>-position-bottom" name="artist[main_background_position]">
 
-	<label for="<%= prop_id %>-position-left" class="btn btn-mini<%= " active" if current_user.main_background_position == "left" %>"><i class="icon-arrow-left"></i> Left</label>
-	<input type="radio" style="display:none" value="left" id="<%= prop_id %>-position-left" name="user[main_background_position]">
+	<label for="<%= prop_id %>-position-left" class="btn btn-mini<%= " active" if current_artist.main_background_position == "left" %>"><i class="icon-arrow-left"></i> Left</label>
+	<input type="radio" style="display:none" value="left" id="<%= prop_id %>-position-left" name="artist[main_background_position]">
 
-	<label for="<%= prop_id %>-position-right" class="btn btn-mini<%= " active" if current_user.main_background_position == "right" %>"><i class="icon-arrow-right"></i> Right</label>
-	<input type="radio" style="display:none" value="right" id="<%= prop_id %>-position-right" name="user[main_background_position]">
+	<label for="<%= prop_id %>-position-right" class="btn btn-mini<%= " active" if current_artist.main_background_position == "right" %>"><i class="icon-arrow-right"></i> Right</label>
+	<input type="radio" style="display:none" value="right" id="<%= prop_id %>-position-right" name="artist[main_background_position]">
 </div>
 <hr>
 <div class="btn-group" data-toggle="buttons-radio">
 	<label class="btn btn-inverse btn-mini disabled">Background Attachment:</label>
 
-	<label for="<%= prop_id %>-attachment-fixed" class="btn btn-mini<%= " active" if current_user.main_background_attachment == "fixed" %>"><i class="icon-move"></i> Fixed</label>
-	<input type="radio" style="display:none" value="fixed" id="<%= prop_id %>-attachment-fixed" name="user[main_background_attachment]">
+	<label for="<%= prop_id %>-attachment-fixed" class="btn btn-mini<%= " active" if current_artist.main_background_attachment == "fixed" %>"><i class="icon-move"></i> Fixed</label>
+	<input type="radio" style="display:none" value="fixed" id="<%= prop_id %>-attachment-fixed" name="artist[main_background_attachment]">
 
-	<label for="<%= prop_id %>-attachment-scroll" class="btn btn-mini<%= " active" if current_user.main_background_attachment == "scroll" %>"><i class="icon-arrow-down"></i> Scroll</label>
-	<input type="radio" style="display:none" value="scroll" id="<%= prop_id %>-attachment-scroll" name="user[main_background_attachment]">
+	<label for="<%= prop_id %>-attachment-scroll" class="btn btn-mini<%= " active" if current_artist.main_background_attachment == "scroll" %>"><i class="icon-arrow-down"></i> Scroll</label>
+	<input type="radio" style="display:none" value="scroll" id="<%= prop_id %>-attachment-scroll" name="artist[main_background_attachment]">
 </div>

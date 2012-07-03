@@ -1,0 +1,58 @@
+<%= provide(:title, 'Manage Galleries') %>
+<div class="row">
+  	<div class="span12">
+    	<ul class="breadcrumb">
+
+		  <li>
+		    <%= link_to_icon "lock", "Top Secret", admin_path %> <span class="divider">/</span>
+		  </li>
+    	  <li class="active"><i class="icon-picture"></i> Manage Galleries</li>
+    	</ul>
+	</div>
+</div>
+<div class="row">
+	<div class="span3">
+		<div class="well">
+			<h4><i class="icon-wrench"></i> Gallery Admin</h4>
+			<hr>
+			<p>You can edit, view, or delete any gallery.</p>
+		</div>
+	</div>
+	<div class="span9">
+		<div class="pull-right">
+			<%= link_to "<i class='icon-plus'></i> New Gallery".html_safe, new_admin_gallery_path, :class => "btn btn-success" %>
+		</div>
+		<h2>All Galleries</h2>
+		<ul class="thumbnails">
+			<% @galleries.each do |gallery| %>
+			<li class="span3">
+				<div class="thumbnail">
+					<%= image_tag(gallery.cover.url(:medium)) %>
+					<div class="caption">
+						<h5><%= link_to gallery.title, gallery %></h5>
+						<p>
+			            	<%= link_to "<i class='icon-wrench'></i>".html_safe, gallery_images_path(gallery), :class => "btn btn-mini btn-inverse", :rel => "tooltip", :title => "Gallery manager, you can edit and upload images here." %>
+			            	<%= link_to "<i class='icon-plus'></i>".html_safe, new_gallery_image_path(gallery), :class => "btn btn-mini btn-success", :rel => "tooltip", :title => "Add a new image to the gallery." %>
+			            	<%= link_to "<i class='icon-edit'></i>".html_safe, edit_admin_gallery_path(gallery), :class => 'btn btn-mini btn-info', :rel => "tooltip", :title =>  "Edit gallery details and cover image."  %>
+			            	<%= link_to "<i class='icon-remove'></i>".html_safe,
+			            	            gallery_path(gallery),
+			            	            :method => :delete,
+			            	            :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')),
+			            	            :class => 'btn btn-mini btn-danger',
+			            	            :rel => "tooltip", :title => "Delete this gallery forever." %>
+			            </p>
+   			</li>
+			<% end %>
+		</ul>
+		<% if @galleries.empty? %>
+			<div class="alert alert-info">
+        		There are no galleries. <%= link_to "<i class='icon-plus'></i> Click here to create one.".html_safe, new_admin_gallery_path %>
+			</div>
+		<% end %>
+		<hr>
+	    <div class="dropzone">
+	      <i class="icon-plus"></i>
+	      <p>Drop images here to upload into a new album.</p>
+	    </div>
+	</div>
+</div>

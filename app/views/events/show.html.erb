@@ -1,0 +1,28 @@
+<%= provide(:title, @event.title) %>
+<div class="row">
+	<div class="span6">
+		<ul class="thumbnails">
+			<li class="span6">
+				<%= link_to image_tag(@event.photo.url(:full)), nil, :class => "thumbnail" %>
+			</li>
+		</ul>
+
+		<div class="well">
+			<h2><%= @event.title %></h2>
+			<h6>Start</h6>
+			<p><%= @event.start %></p>
+			<h6>End</h6>
+			<p><%= @event.end %></p>
+			<h6>About</h6>
+			<p><%= @event.about %></p>
+		</div>
+	</div>
+	<div class="span6">
+		<h2>Comments</h2>
+		<div class="well">
+			<%= render "comments/comments" %>
+			<h6 class="hb">Write your own comment</h6>
+			<%= render "comments/form" %>
+		</div>
+	</div>
+</div>

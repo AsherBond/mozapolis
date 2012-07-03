@@ -1,6 +1,7 @@
 @import "twitter/bootstrap/bootstrap";
 body { 
 	padding-top: 60px;
+
 }
 @import "twitter/bootstrap/responsive";
 
@@ -29,12 +30,18 @@ body {
 @tableBackgroundAccent:@myYellow;
 @tableBorder: #c4c4c4;
 
+@btnSuccessBackground: darken(#62c462, 20%);
+@btnSuccessBackgroundHighlight: darken(#51a351, 20%);
+
 body {
 	background: url('/assets/bg.png');
 }
-
+hr { border-top:1px solid rgba(0,0,0,0.1); border-bottom:1px solid rgba(255,255,255,0.2);}
+.condensed { font-family: 'Open Sans Condensed', sans-serif;  }
 // Navbar
-
+.navbar-inner {
+	padding-top:4px;
+}
 .navbar-inner a.brand {
 	color:white;
 	font-family: 'Oleo Script', cursive;
@@ -57,14 +64,28 @@ body {
 .container > ul.nav > li > a {
 	.transition(color .2s ease-in-out);
 }
-.navbar-inner ul.dropdown-menu li a:hover {
-	background:darken(@white, 10%);
-	color:@myRed;
+
+.notification-count {
+	margin-left:-5px;
+
 }
 .enlarge {
 	font-size:32px;
 }
+// Drop Down menu
 
+ul.dropdown-menu {
+
+	#gradient > .vertical(darken(@white, 3%), darken(@white, 15%));
+	.box-shadow(inset 0 0 25px 10px rgba(0,0,0,.1));
+	border-color: darken(@white, 35%);
+	.transition(all .5s ease-in-out);
+
+	li a:hover {
+		background:rgba(0, 0, 0,.7);
+	}
+
+}
 // Wells
 
 .well {
@@ -127,6 +148,7 @@ a.thumbnail:hover, div.thumbnail:hover {
 		margin-top: -40px;
 		font-size:130%;
 		text-align:center;
+		.box-shadow(0 0 15px 10px rgba(0,0,0,.3));
 	}
 }
 .alert-success {
@@ -186,11 +208,10 @@ label { font-weight:bold; }
 }
 
 
-form#new_artist, form#new_fan {
-	input.string, input.password {
-		padding:10px;
-	}
+input.string, input.password {
+	padding:10px;
 }
+
 
 // Songs
 
@@ -246,4 +267,73 @@ ul.breadcrumb:hover {
 .paper {
 	background:black;
 	padding:20px;
+}
+
+
+// Footer
+footer {
+	
+	color:darken(@white, 30%);
+
+	a {
+		color:@white;
+	}
+
+	a:hover {
+		color:lighten(@black, 10%);
+	}
+
+	li {
+		margin-top:5px;
+		margin-bottom:5px;
+	}
+
+}
+#footer-logo {
+	text-align:center;
+
+	h1 {
+		font-family: 'Oleo Script', cursive;
+		font-size:46px;
+		line-height:50px;
+		text-shadow: 0px 1px 1px rgba(255,255,255,0.1);
+		.rotate(-2deg);
+		color:lighten(@black, 25%);
+		margin:10px 0;
+	}
+
+
+}
+#footer-container {
+	#gradient > .vertical(lighten(@black, 30%), lighten(@black, 45%));
+	padding-top:30px;
+	padding-bottom:30px;
+
+}
+
+#footer-header {
+	background-image:url('/assets/grad_footer.png'); 
+	padding-top:87px;
+
+
+}
+
+// Edit Profile
+
+#edit-profile-links {
+	font-family: 'Open Sans Condensed', sans-serif;
+	font-size:26px;
+
+	li a {
+		padding:15px;
+	}
+
+
+}
+
+// Modals
+.modal {
+    overflow-y:auto;
+    max-height:90%;
+    margin-top:-45%;
 }

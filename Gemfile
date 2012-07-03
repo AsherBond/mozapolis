@@ -10,7 +10,6 @@ group :assets do
   gem 'sass-rails',   '~> 3.2.3'
   gem 'coffee-rails', '~> 3.2.1'
   gem 'twitter-bootstrap-rails', :git => 'git://github.com/seyhunak/twitter-bootstrap-rails.git'
-  gem 'chosen-rails'
 
   gem 'uglifier', '>= 1.0.3'
 end
@@ -33,3 +32,6 @@ gem 'acts_as_list'
 gem 'gon'
 gem "paperclip", :git => "git://github.com/thoughtbot/paperclip.git"
 # gem "paperclip-ffmpeg"
+gem 'thumbs_up'
+gem 'bootstrap-datepicker-rails', :require => 'bootstrap-datepicker-rails', :git => 'git://github.com/Nerian/bootstrap-datepicker-rails.git'
+gem 'impressionist'

@@ -1,7 +1,12 @@
 class EventsController < ApplicationController
-
+  def sort
+    params[:event].each_with_index do |id, index|
+      Event.update_all({position: index+1}, {id: id})
+    end
+    render nothing: true
+  end
   def index
-    @events = Event.all
+    @events = Event.where(:artist_id => current_artist).order(:position)
 
     respond_to do |format|
       format.html # index.html.erb

@@ -9,9 +9,9 @@
  * compiled file, but it's generally better to create a new file per style scope.
  *
  *= require_self
- *= require chosen
+ *= require bootstrap-datepicker
  *= require token-input-facebook
  *= require_tree .
  */
 
-@import url(http://fonts.googleapis.com/css?family=Oleo+Script:400,700|Open+Sans);
+@import url(http://fonts.googleapis.com/css?family=Oleo+Script:400,700|Open+Sans|Open+Sans+Condensed:300);
