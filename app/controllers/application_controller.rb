@@ -21,12 +21,16 @@ class ApplicationController < ActionController::Base
 
         notify.notify_object = voteable.id
         notify.notify_type   = voteable.class.name
-        notify.notify_type   = voteable.class.name
         notify.user_type     = "artist"
         notify.artist_id     = current_artist.id
-        notify.notify_user   = voteable.artist.id
-        notify.message       = "You have a new up-vote on the #{voteable.class.name.downcase} <strong>#{voteable.title}</strong>."
-        
+
+        if voteable.class.name.downcase == "song"
+          notify.notify_user   = voteable.album.artist_id
+          notify.message       = "You have a new up-vote on the song <strong>#{voteable.title}</strong>."
+        else
+          notify.notify_user   = voteable.artist.id
+          notify.message       = "You have a new up-vote on the #{voteable.class.name.downcase} <strong>#{voteable.title}</strong>."
+        end
         notify.save
 
         current_artist.vote_for(voteable)   
@@ -67,12 +71,16 @@ class ApplicationController < ActionController::Base
 
         notify.notify_object = voteable.id
         notify.notify_type   = voteable.class.name
-        notify.notify_type   = voteable.class.name
         notify.user_type     = "artist"
         notify.artist_id     = current_artist.id
-        notify.notify_user   = voteable.artist.id
-        notify.message       = "You have a new down-vote on the #{voteable.class.name.downcase} <strong>#{voteable.title}</strong>."
-        
+
+        if voteable.class.name.downcase == "song"
+          notify.notify_user   = voteable.album.artist_id
+          notify.message       = "You have a new down-vote on the song <strong>#{voteable.title}</strong>."
+        else
+          notify.notify_user   = voteable.artist.id
+          notify.message       = "You have a new down-vote on the #{voteable.class.name.downcase} <strong>#{voteable.title}</strong>."
+        end
         notify.save
 
         current_artist.vote_against(voteable)   
