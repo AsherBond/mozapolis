@@ -36,7 +36,8 @@ body {
 body {
 	background: url('/assets/bg.png');
 }
-hr { border-top:1px solid rgba(0,0,0,0.1); border-bottom:1px solid rgba(255,255,255,0.2);}
+hr{ border-top:1px solid rgba(0,0,0,0.1); border-bottom:1px solid rgba(255,255,255,0.2);}
+
 .condensed { font-family: 'Open Sans Condensed', sans-serif;  }
 // Navbar
 .navbar-inner {
@@ -66,11 +67,29 @@ hr { border-top:1px solid rgba(0,0,0,0.1); border-bottom:1px solid rgba(255,255,
 }
 
 .notification-count {
-	margin-left:-5px;
+	margin-left:-15px;
 
+}
+#notifications {
+	position:fixed;
+	margin-top:-15px;
+	margin-bottom:15px;
+
+	.alert {
+		padding-top:15px;
+		ul { list-style: none; }
+	}
+
+	h6 {
+		color:white;
+	}
 }
 .enlarge {
 	font-size:32px;
+}
+.nav-pills li a:hover {
+	background-color:@myRed;
+	color:white;
 }
 // Drop Down menu
 
@@ -349,4 +368,22 @@ footer {
     overflow-y:auto;
     max-height:90%;
     margin-top:-45%;
+}
+
+// Home Page 
+
+#new-artists {
+	div.thumbnail {
+		min-height:330px;
+	}
+}
+#new-albums {
+	div.thumbnail {
+		min-height:370px;
+	}
+}
+#top-artists {
+	div.thumbnail {
+		min-height:230px;
+	}
 }

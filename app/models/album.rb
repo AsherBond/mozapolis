@@ -1,6 +1,6 @@
 class Album < ActiveRecord::Base
-  	has_many :songs
-	has_many :comments, as: :commentable
+  	has_many :songs, :dependent => :destroy
+	has_many :comments, as: :commentable, :dependent => :destroy
   	belongs_to :artist
 
 	# Friendly URLS

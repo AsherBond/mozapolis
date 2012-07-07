@@ -4,8 +4,8 @@ class ArtistsController < ApplicationController
   impressionist :unique => [:controller_name, :action_name, :session_hash], :actions => [:show]
   def index 
     #gon.users = User.all.map &:artist_name
-  	@artists = Artist.text_search(params[:query]).page(params[:page]).per_page(3)
-    render :layout => 'search'
+  	#@artists = Artist.text_search(params[:query]).page(params[:page]).per_page(3)
+    #render :layout => 'search'
   end
 
   def show

@@ -6,8 +6,6 @@ class ApplicationController < ActionController::Base
     vote_up_msg   = "<i class='icon-thumbs-up'></i> Voted up.".html_safe
     vote_already  = "<i class='icon-flag'></i> You have voted already.".html_safe
 
-    
-
     if artist_signed_in?
       # Check if they voted already.
       if current_artist.voted_on?(voteable)
@@ -19,10 +17,10 @@ class ApplicationController < ActionController::Base
 
         notify = Notification.new
 
-        notify.notify_object = voteable.id
-        notify.notify_type   = voteable.class.name
-        notify.user_type     = "artist"
-        notify.artist_id     = current_artist.id
+        notify.notify_object   = voteable.id
+        notify.notify_type     = voteable.class.name
+        notify.user_type       = "artist"
+        notify.artist_id       = current_artist.id
 
         if voteable.class.name.downcase == "song"
           notify.notify_user   = voteable.album.artist_id

@@ -62,6 +62,7 @@
                       <% end %>
                     </td>
                     <td>
+                      <div class="btn-group">
                       <% if artist_signed_in? %>
                         <% if current_artist.voted_on?(song) %>
                           <%= link_to "#{song.votes_for} <i class='icon-thumbs-up'></i>".html_safe, upvote_songs_url("song_id" => song.id), :method => :post, :class => " vote btn disabled btn-mini btn-success" %>
@@ -81,9 +82,10 @@
                           <%= link_to "#{song.votes_against} <i class='icon-thumbs-down'></i>".html_safe, downvote_songs_url("song_id" => song.id), :method => :post, :class => " vote btn btn-mini btn-danger" %>
                         <% end %>
                       <% end %>
+                      </div>
                     </td>
                     <td>2,325</td>
-                    <td><%= link_to "<i class='icon-comments'></i> Add Comment (#{song.comments.count})".html_safe, "#song_#{song.id}", :data => { :toggle => :modal} %></td>
+                    <td><%= link_to "<i class='icon-comments'></i> Comments (#{song.comments.count})".html_safe, "#song_#{song.id}", :class => "btn btn-mini", :data => { :toggle => :modal} %></td>
                 </tr>
                 <% end %>
 

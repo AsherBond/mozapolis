@@ -20,13 +20,19 @@ class CommentsController < ApplicationController
       notify.user_type = "artist"
       notify.artist_id = current_artist.id
 
+
+
       if @commentable.class.name.downcase == "song"
         notify.notify_user   = @commentable.album.artist_id
+        notify.message = "You have a new comment on the song <strong>#{@commentable.title}</strong>."
+      elsif @commentable.class.name.downcase == "artist"
+        notify.notify_user   = @commentable.id
+        notify.message = "You have a new comment on your profile."
       else
         notify.notify_user   = @commentable.artist.id
+        notify.message = "You have a new comment on the #{@commentable.class.name.downcase} <strong>#{@commentable.title}</strong>."
       end
 
-      notify.message = "You have a new comment on the #{@commentable.class.name.downcase} <strong>#{@commentable.title}</strong>."
       notify.save
 
       @comment.poster_type = "artist"

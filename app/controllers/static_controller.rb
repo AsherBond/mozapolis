@@ -4,7 +4,7 @@ class StaticController < ApplicationController
   	@new_albums   = Album.all
     @top_albums   = Album.tally.limit(10).order(:vote_count)
     @new_songs    = Song.all
-    @top_songs    = Song.tally.limit(10).order(:vote_count)
+    @top_songs    = Song.all
   	@new_comments = Comment.all
   end
 

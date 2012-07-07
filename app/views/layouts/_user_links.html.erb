@@ -1,6 +1,28 @@
 <% if artist_signed_in? %>
 
-  <li class="enlarge"><%= link_to "<i class='icon-book'></i><span class='label label-warning notification-count'>#{current_artist.notifications.count}</span>".html_safe, notifications_path, :rel => "tooltip", :data => { :placement => "bottom" }, :title => "Notifications"  %></li>
+
+  <li class="dropdown">
+    <a href="#" class="dropdown-toggle enlarge" data-toggle="collapse" data-target="#notifications" rel="tooltip" title="Notifications." data-placement="bottom">
+      <i class="icon-book"></i>
+      <span class='badge badge-inverse notification-count'><%= current_artist.notifications.count %></span>
+    </a>
+    <ul class="dropdown-menu" style="max-width:550px;">
+          <li><%= link_to_icon "bolt",  "Notification Dashboard", notifications_path %></li>
+          <li class="nav-header">Newest Notifications</li>
+          <% if current_artist.notifications.each do |n| %>
+            <% object_type = n.notify_type %>
+
+            <% object = object_type.singularize.classify.constantize.find(n.notify_object) %>
+
+            <li><%= link_to_icon "pushpin", n.message.html_safe, object %></li>
+
+          <% end.empty? %>
+            <li><%= link_to_icon "bell",  "You have no notifications :(", notifications_path %></li>
+          <% end %>
+
+    </ul>
+  </li>
+
   <li class="dropdown">
     <a href="#" class="dropdown-toggle enlarge" data-toggle="dropdown" rel="tooltip" title="Your Dashboards for managing all aspects of your account." data-placement="bottom">
       <i class="icon-dashboard"></i>
@@ -39,5 +61,5 @@
 
 <% if user_signed_in? || fan_signed_in? || artist_signed_in? %>
   <li class="divider-vertical"></li>
-  <li><%= link_to'<i class="icon-signout"></i> Signout'.html_safe, destroy_artist_session_path, :method => :delete %></li>
+  <li><%= link_to'<i class="icon-signout enlarge"></i>'.html_safe, destroy_artist_session_path, :method => :delete %></li>
 <% end %>

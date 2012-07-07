@@ -8,7 +8,8 @@
   <hr>
   <%= f.input :file %>
   <div class="form-actions">
-    <%= f.button :submit, :class => 'btn-primary' %>
+    <script type="text/javascript">$('.btn-primary').button('toggle');</script>
+    <%= f.button :submit, :class => 'btn-primary', :data => {:toggle => :button, "loading-text" => "Uploading Song..."} %>
     <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
                 album_songs_path, :class => 'btn' %>
   </div>

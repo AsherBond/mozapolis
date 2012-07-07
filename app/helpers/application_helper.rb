@@ -9,9 +9,19 @@ module ApplicationHelper
 		end
 	end
 
-	def link_to_icon(icon, title, url)
-		link_to "<i class='icon-#{icon}'></i> #{title}".html_safe, url
+	def link_to_icon(icon, title, url, style=nil)
+		link_to "<i class='icon-#{icon}'></i> #{title}".html_safe, url, :class => "#{style}"
 	end
+
+	def image_tag_if(image, style=nil)
+
+		if image.file?
+			image_tag image, :class => "#{style}" 
+		else
+			image_tag "http://placehold.it/500x500", :class => "#{style}"
+		end
+	end
+
 	def make_css_for(css_class,attribute,value,append=nil,prepend=nil)
 
 		if value == "FFFFFF" || value.blank?
